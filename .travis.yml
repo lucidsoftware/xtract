@@ -6,6 +6,13 @@ scala:
 jdk:
   - oraclejdk8
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/boot/
+
 after_success:
   - |
     if [ -n "$TRAVIS_TAG" ]; then
@@ -30,3 +37,7 @@ deploy:
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION test package
+
+  #Avoid unncessary cache updates
+  - find $HOME/.sbt -name "*.lock" | xargs rm
+  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
