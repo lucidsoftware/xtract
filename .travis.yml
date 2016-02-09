@@ -15,7 +15,7 @@ cache:
 
 after_success:
   - |
-    if [ -n "$TRAVIS_TAG" ] || ([ "$TRAVIS_PULL_REQUEST" == false] && [ "$TRAVIS_BRANCH" == master ])
+    if [ -n "$TRAVIS_TAG" ] || ([ "$TRAVIS_PULL_REQUEST" == false ] && [ "$TRAVIS_BRANCH" == master ])
     then
       mkdir ~/.pgp
       echo $PGP_PUBLIC > ~/.pgp/pubring
