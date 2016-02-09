@@ -1,17 +1,11 @@
 language: scala
+
 scala:
   - 2.11.7
+
 jdk:
   - oraclejdk8
 
-deploy:
-  api_key: $GITHUB_AUTH
-  file: target/**.jar
-  file_glob: true
-  on:
-    tags: true
-  provider: releases
-  skip_cleanup: true
 after_success:
   - |
     if [ -n "$TRAVIS_TAG" ]; then
@@ -19,12 +13,20 @@ after_success:
       echo $PGP_PUBLIC | base64 --decode > ~/.pgp/pubring
       echo $PGP_SECRET | base64 --decode > ~/.pgp/secring
       sbt ++$TRAVIS_SCALA_VERSION publishSigned
-    elif [ "$TRAVIS_PULL_REQUEST" == false ] && [ "$TRAVIS_BRANCH" == master]; then
+    elif [ "$TRAVIS_PULL_REQUEST" == false ] && [ "$TRAVIS_BRANCH" == master ]; then
       mkdir ~/.pgp
       echo $PGP_PUBLIC | base64 --decode > ~/.pgp/pubring
       echo $PGP_SECRET | base64 --decode > ~/.pgp/secring
       sbt ++$TRAVIS_SCALA_VERSION publishSigned
     fi
+deploy:
+  api_key: $GITHUB_AUTH
+  file: target/**/*.jar
+  file_glob: true
+  on:
+    tags: true
+    provider: releases
+    skip_cleanup: true
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION test package
