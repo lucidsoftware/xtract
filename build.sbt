@@ -1,5 +1,7 @@
 name := "Xtract"
 
+scalaVersion := "2.11.7"
+
 lazy val commonSettings = Seq(
   organization := "com.lucidchart",
   version := "1.0",
@@ -85,3 +87,9 @@ lazy val unitTests = project.in(file("unit-tests")).settings(commonSettings: _*)
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
 lazy val root = project.in(file(".")).aggregate(xtract, xtractTesting, unitTests)
+
+/*
+scalacOptions in (Compile, doc) ++= Seq(
+  "-doc-source-url", "https://github.com/lucidsoftware/xtract/tree/master/€{FILE_PATH}.scala"
+)
+ */
