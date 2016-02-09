@@ -32,10 +32,10 @@ deploy:
   api_key: $GITHUB_AUTH
   file: target/**/*.jar
   file_glob: true
+  provider: releases
+  skip_cleanup: true
   on:
     tags: true
-    provider: releases
-    skip_cleanup: true
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION test package
