@@ -14,8 +14,10 @@ lazy val commonSettings = Seq(
 
   libraryDependencies ++= Seq(
     "org.scala-lang.modules" %% "scala-xml" % "1.0.5"
-  ),
+  )
+)
 
+lazy val publishSettings = commonSettings ++ Seq(
   pomExtra := (
     <url>http://github.com/lucidsoftware/xtract</url>
     <licenses>
@@ -58,7 +60,7 @@ lazy val commonSettings = Seq(
 
 lazy val specs2Dependency = "org.specs2" %% "specs2" % "3.7"
 
-lazy val xtract = project.in(file("xtract-core")).settings(commonSettings: _*).settings(
+lazy val xtract = project.in(file("xtract-core")).settings(publishSettings: _*).settings(
   name := "xtract",
   description := "Library to deserialize Xml to user types.",
   libraryDependencies ++= Seq(
@@ -66,7 +68,7 @@ lazy val xtract = project.in(file("xtract-core")).settings(commonSettings: _*).s
   )
 )
 
-lazy val xtractTesting = project.in(file("testing")).settings(commonSettings: _*).settings(
+lazy val xtractTesting = project.in(file("testing")).settings(publishSettings: _*).settings(
   name := "xtract-testing",
   description := "Specs2 matchers for xtract.",
   libraryDependencies ++= Seq(
@@ -76,7 +78,7 @@ lazy val xtractTesting = project.in(file("testing")).settings(commonSettings: _*
 
 // we have a seperate project for tests, so that we cand depend on
 // xtract-testing
-lazy val unitTests = project.in(file("unit-tests")).settings(commonSettings: _*).settings(
+lazy val allTests = project.in(file("unit-tests")).settings(commonSettings: _*).settings(
   publishArtifact := false,
   packagedArtifacts := Map.empty,
   publish := (),
@@ -86,7 +88,9 @@ lazy val unitTests = project.in(file("unit-tests")).settings(commonSettings: _*)
   )
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
-lazy val root = project.in(file(".")).aggregate(xtract, xtractTesting, unitTests)
+lazy val root = project.in(file(".")).aggregate(xtract, xtractTesting, allTests).settings(
+  publishArtifact := false
+)
 
 /*
 scalacOptions in (Compile, doc) ++= Seq(
