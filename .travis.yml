@@ -6,7 +6,7 @@ jdk:
 
 deploy:
   api_key: $GITHUB_AUTH
-  file: target/**/*.jar
+  file: target/**.jar
   file_glob: true
   on:
     tags: true
