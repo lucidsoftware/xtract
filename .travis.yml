@@ -18,8 +18,8 @@ after_success:
     if [ -n "$TRAVIS_TAG" ] || ([ "$TRAVIS_PULL_REQUEST" == false ] && [ "$TRAVIS_BRANCH" == master ])
     then
       mkdir ~/.pgp
-      echo $PGP_PUBLIC > ~/.pgp/pubring
-      echo $PGP_SECRET > ~/.pgp/secring
+      echo $PGP_PUBLIC | base64 --decode > ~/.pgp/pubring
+      echo $PGP_SECRET | base64 --decode > ~/.pgp/secring
       echo "Publishing snapshot"
       sbt xtract/publishSigned xtractTesting/publishSigned
     fi
