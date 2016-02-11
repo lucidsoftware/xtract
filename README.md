@@ -19,9 +19,9 @@ specs2. To use in your test you can add the following sbt dependency:
 
 ## Documentation
 
-The scaladoc API for the core functionality is available at [http://lucidsoftware.github.io/xtract/core/api/].
+The scaladoc API for the core functionality is available at http://lucidsoftware.github.io/xtract/core/api/.
 
-Scaladocs for the specs2 extensions is available at [http://lucidsoftware.github.io/xtract/testing/api/].
+Scaladocs for the specs2 extensions is available at http://lucidsoftware.github.io/xtract/testing/api/.
 
 [1]: https://www.playframework.com/documentation/2.5.x/ScalaJsonCombinators
 [2]: https://www.playframework.com/documentation/2.5.x/api/scala/index.html#play.api.libs.json.Reads
