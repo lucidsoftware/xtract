@@ -5,5 +5,8 @@ package com.lucidchart.open
  */
 package object xtract {
 
+  /**
+   * Alias for the root [[XPath]]
+   */
   val __ = XPath
 }
