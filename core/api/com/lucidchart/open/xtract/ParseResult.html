@@ -51,7 +51,10 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Self Type</dt><dd><a href="" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a>[<span class="extype" name="com.lucidchart.open.xtract.ParseResult.A">A</span>]</dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Trait containing the result of an <a href="XmlReader.html" class="extype" name="com.lucidchart.open.xtract.XmlReader">XmlReader</a>.
+It can contain one of the following:</p><ul><li><a href="ParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.ParseSuccess">ParseSuccess</a> indicates a completely successful result</li><li><a href="ParseFailure.html" class="extype" name="com.lucidchart.open.xtract.ParseFailure">ParseFailure</a> indicates a completely failed result</li><li><a href="PartialParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.PartialParseSuccess">PartialParseSuccess</a> indicates there were recoverable errors
+   and contains both the result and a list of errors that occurred.
+</li></ul></div><dl class="attributes block"> <dt>Self Type</dt><dd><a href="" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a>[<span class="extype" name="com.lucidchart.open.xtract.ParseResult.A">A</span>]</dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -113,7 +116,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A sequence of all <a href="ParseError.html" class="extype" name="com.lucidchart.open.xtract.ParseError">ParseError</a>s that occurred.</p>
     </li><li name="com.lucidchart.open.xtract.ParseResult#get" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="get:A"></a>
       <a id="get:A"></a>
@@ -131,7 +134,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
-    </li><li name="com.lucidchart.open.xtract.ParseResult#isSuccessful" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.ParseResult#isSuccessful" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="isSuccessful:Boolean"></a>
       <a id="isSuccessful:Boolean"></a>
       <h4 class="signature">
@@ -147,7 +150,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Is the result a success, i.e.</p><div class="fullcomment"><div class="comment cmt"><p>Is the result a success, i.e. either a <a href="ParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.ParseSuccess">ParseSuccess</a> or a <a href="PartialParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.PartialParseSuccess">PartialParseSuccess</a>.
+</p></div></div>
     </li></ol>
             </div>
 
@@ -244,7 +248,7 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="com.lucidchart.open.xtract.ParseResult#collect" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.ParseResult#collect" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="collect[B](pf:PartialFunction[A,B]):com.lucidchart.open.xtract.ParseResult[B]"></a>
       <a id="collect[B](PartialFunction[A,B]):ParseResult[B]"></a>
       <h4 class="signature">
@@ -260,8 +264,10 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="com.lucidchart.open.xtract.ParseResult#collect" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Apply a PartialFunction to the result value.</p><div class="fullcomment"><div class="comment cmt"><p>Apply a PartialFunction to the result value.
+If the <code>pf</code> function isn't defined for the result value a <a href="ParseFailure.html" class="extype" name="com.lucidchart.open.xtract.ParseFailure">ParseFailure</a> is returned.
+</p></div></div>
+    </li><li name="com.lucidchart.open.xtract.ParseResult#collect" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="collect[B](otherwise:=&gt;com.lucidchart.open.xtract.ParseError)(pf:PartialFunction[A,B]):com.lucidchart.open.xtract.ParseResult[B]"></a>
       <a id="collect[B](⇒ParseError)(PartialFunction[A,B]):ParseResult[B]"></a>
       <h4 class="signature">
@@ -277,7 +283,10 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Apply a PartialFunction to the result value.</p><div class="fullcomment"><div class="comment cmt"><p>Apply a PartialFunction to the result value.
+If the <code>pf</code> isn't defined for the result value, a <a href="ParseFailure.html" class="extype" name="com.lucidchart.open.xtract.ParseFailure">ParseFailure</a> with the <code>otherwise</code> error
+is returned.
+</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -312,7 +321,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="com.lucidchart.open.xtract.ParseResult#filter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.ParseResult#filter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="filter(f:A=&gt;Boolean):com.lucidchart.open.xtract.ParseResult[A]"></a>
       <a id="filter((A)⇒Boolean):ParseResult[A]"></a>
       <h4 class="signature">
@@ -328,7 +337,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>Predicate to filter the <a href="" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a> by</p></dd><dt>returns</dt><dd class="cmt"><p>this if the test passes, or <a href="ParseFailure.html" class="extype" name="com.lucidchart.open.xtract.ParseFailure">ParseFailure</a> if the test fails.</p></dd></dl></div>
     </li><li name="com.lucidchart.open.xtract.ParseResult#filter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="filter(error:=&gt;com.lucidchart.open.xtract.ParseError)(f:A=&gt;Boolean):com.lucidchart.open.xtract.ParseResult[A]"></a>
       <a id="filter(⇒ParseError)((A)⇒Boolean):ParseResult[A]"></a>
@@ -345,7 +354,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>if the result is successful and the filter fails ParseFailure is returned</p></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">error</dt><dd class="cmt"><p>The error to use if the test fails.</p></dd><dt class="param">f</dt><dd class="cmt"><p>Predicate to filter the <a href="" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a> by</p></dd><dt>returns</dt><dd class="cmt"><p>if the result is successful and the filter fails ParseFailure is returned</p></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -369,7 +378,7 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="com.lucidchart.open.xtract.ParseResult#flatMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.ParseResult#flatMap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="flatMap[B](f:A=&gt;com.lucidchart.open.xtract.ParseResult[B]):com.lucidchart.open.xtract.ParseResult[B]"></a>
       <a id="flatMap[B]((A)⇒ParseResult[B]):ParseResult[B]"></a>
       <h4 class="signature">
@@ -385,7 +394,12 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">FlatMap over the result value.</p><div class="fullcomment"><div class="comment cmt"><p>FlatMap over the result value.</p><p>One thing to note is that if this is a <a href="PartialParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.PartialParseSuccess">PartialParseSuccess</a>, then
+the errors are prepended to the result of calling <code>f</code> on the value.
+So for example, if <code>f</code> returns a <a href="ParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.ParseSuccess">ParseSuccess</a>, but this is a <a href="PartialParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.PartialParseSuccess">PartialParseSuccess</a>
+the final result will be a <a href="PartialParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.PartialParseSuccess">PartialParseSuccess</a> containing the result from <code>f</code> and the
+errors from this.
+</p></div></div>
     </li><li name="com.lucidchart.open.xtract.ParseResult#foreach" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="foreach(f:A=&gt;Unit):Unit"></a>
       <a id="foreach((A)⇒Unit):Unit"></a>
@@ -402,7 +416,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+      <p class="shortcomment cmt">Execute <code>f</code> on the result value if and only if this <a href="" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a> is successful.</p><div class="fullcomment"><div class="comment cmt"><p>Execute <code>f</code> on the result value if and only if this <a href="" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a> is successful.</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>the function to execute.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@inline</span><span class="args">()</span>
               
         </dd></dl></div>
@@ -423,7 +437,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="com.lucidchart.open.xtract.ParseResult#getOrElse" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.ParseResult#getOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getOrElse[B&gt;:A](otherwise:=&gt;B):B"></a>
       <a id="getOrElse[B&gt;:A](⇒B):B"></a>
       <h4 class="signature">
@@ -439,7 +453,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the result value, unless this is a <a href="ParseFailure.html" class="extype" name="com.lucidchart.open.xtract.ParseFailure">ParseFailure</a> in which case return <code>otherwise</code>.</p></dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -474,7 +488,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="com.lucidchart.open.xtract.ParseResult#map" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.ParseResult#map" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="map[B](f:A=&gt;B):com.lucidchart.open.xtract.ParseResult[B]"></a>
       <a id="map[B]((A)⇒B):ParseResult[B]"></a>
       <h4 class="signature">
@@ -490,7 +504,9 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Map a function over the result value.</p><div class="fullcomment"><div class="comment cmt"><p>Map a function over the result value.
+The level of success, and any errors are propagated.
+</p></div></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -542,7 +558,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="com.lucidchart.open.xtract.ParseResult#orElse" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.ParseResult#orElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="orElse[B&gt;:A](otherwise:=&gt;com.lucidchart.open.xtract.ParseResult[B]):com.lucidchart.open.xtract.ParseResult[B]"></a>
       <a id="orElse[B&gt;:A](⇒ParseResult[B]):ParseResult[B]"></a>
       <h4 class="signature">
@@ -558,7 +574,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>this if this is successful otherwise return <code>otherwise</code>.</p></dd></dl></div>
     </li><li name="com.lucidchart.open.xtract.ParseResult#recoverPartial" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="recoverPartial[B&gt;:A](otherwise:=&gt;B):com.lucidchart.open.xtract.ParseResult[B]"></a>
       <a id="recoverPartial[B&gt;:A](⇒B):ParseResult[B]"></a>
@@ -575,7 +591,9 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">If this is a <a href="ParseFailure.html" class="extype" name="com.lucidchart.open.xtract.ParseFailure">ParseFailure</a> recover as a <a href="PartialParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.PartialParseSuccess">PartialParseSuccess</a>
+containing <code>otherwise</code> so that
+the errors are kept.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -593,7 +611,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="com.lucidchart.open.xtract.ParseResult#toOption" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.ParseResult#toOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toOption:Option[A]"></a>
       <a id="toOption:Option[A]"></a>
       <h4 class="signature">
@@ -609,7 +627,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Convert to an Option</p><div class="fullcomment"><div class="comment cmt"><p>Convert to an Option</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a Some containing the result if successful, or a None if a failure</p></dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
@@ -712,7 +730,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Alias for filter
+</p>
     </li></ol>
             </div>
 

@@ -139,7 +139,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"> A <a href="PathError.html" class="extype" name="com.lucidchart.open.xtract.PathError">PathError</a> indicating that the path was missing.</p>
     </li><li name="com.lucidchart.open.xtract.IdxXPathNode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="IdxXPathNodeextendsXPathNodewithProductwithSerializable"></a>
       <a id="IdxXPathNode:IdxXPathNode"></a>
@@ -207,7 +207,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"> A <a href="ValidationError.html" class="extype" name="com.lucidchart.open.xtract.ValidationError">ValidationError</a> indicating there weren't enough entries.</p>
     </li><li name="com.lucidchart.open.xtract.MismatchedLabelError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MismatchedLabelErrorextendsPathErrorwithProductwithSerializable"></a>
       <a id="MismatchedLabelError:MismatchedLabelError"></a>
@@ -224,7 +224,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A <a href="PathError.html" class="extype" name="com.lucidchart.open.xtract.PathError">PathError</a> indicating that the node(s) at the specified path did not
+have the expected tag label.</p>
     </li><li name="com.lucidchart.open.xtract.MultipleMatchesError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MultipleMatchesErrorextendsPathErrorwithProductwithSerializable"></a>
       <a id="MultipleMatchesError:MultipleMatchesError"></a>
@@ -241,7 +242,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A <a href="PathError.html" class="extype" name="com.lucidchart.open.xtract.PathError">PathError</a> indicating that the path matched multiple nodes, and only
+one was expected.</p>
     </li><li name="com.lucidchart.open.xtract.ParseError" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ParseErrorextendsAnyRef"></a>
       <a id="ParseError:ParseError"></a>
@@ -258,7 +260,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Top level types for errors encountered while reading xml with
+an <a href="XmlReader.html" class="extype" name="com.lucidchart.open.xtract.XmlReader">XmlReader</a>.</p>
     </li><li name="com.lucidchart.open.xtract.ParseFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ParseFailureextendsParseResult[Nothing]withProductwithSerializable"></a>
       <a id="ParseFailure:ParseFailure"></a>
@@ -275,8 +278,9 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="com.lucidchart.open.xtract.ParseResult" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">A <a href="ParseResult.html" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a> indicating a failed
+</p>
+    </li><li name="com.lucidchart.open.xtract.ParseResult" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="ParseResult[+A]extendsAnyRef"></a>
       <a id="ParseResult[+A]:ParseResult[A]"></a>
       <h4 class="signature">
@@ -292,7 +296,10 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Trait containing the result of an <a href="XmlReader.html" class="extype" name="com.lucidchart.open.xtract.XmlReader">XmlReader</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Trait containing the result of an <a href="XmlReader.html" class="extype" name="com.lucidchart.open.xtract.XmlReader">XmlReader</a>.
+It can contain one of the following:</p><ul><li><a href="ParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.ParseSuccess">ParseSuccess</a> indicates a completely successful result</li><li><a href="ParseFailure.html" class="extype" name="com.lucidchart.open.xtract.ParseFailure">ParseFailure</a> indicates a completely failed result</li><li><a href="PartialParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.PartialParseSuccess">PartialParseSuccess</a> indicates there were recoverable errors
+   and contains both the result and a list of errors that occurred.
+</li></ul></div></div>
     </li><li name="com.lucidchart.open.xtract.ParseSuccess" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ParseSuccess[+A]extendsParseResult[A]withProductwithSerializable"></a>
       <a id="ParseSuccess[+A]:ParseSuccess[A]"></a>
@@ -309,8 +316,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="com.lucidchart.open.xtract.PartialParseSuccess" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">A <a href="ParseResult.html" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a> indicating a completely successful parse.</p>
+    </li><li name="com.lucidchart.open.xtract.PartialParseSuccess" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="PartialParseSuccess[+A]extendsParseResult[A]withProductwithSerializable"></a>
       <a id="PartialParseSuccess[+A]:PartialParseSuccess[A]"></a>
       <h4 class="signature">
@@ -326,7 +333,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A <a href="ParseResult.html" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a> indicating a successful parse that had recoverable errors.</p><div class="fullcomment"><div class="comment cmt"><p>A <a href="ParseResult.html" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a> indicating a successful parse that had recoverable errors.</p><p>Contains both a result value and a list of errors.
+</p></div></div>
     </li><li name="com.lucidchart.open.xtract.PathError" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="PathErrorextendsValidationError"></a>
       <a id="PathError:PathError"></a>
@@ -343,7 +351,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A <a href="ValidationError.html" class="extype" name="com.lucidchart.open.xtract.ValidationError">ValidationError</a> indicating that the input NodeSeq
+didn't have the expected XPath.</p>
     </li><li name="com.lucidchart.open.xtract.RangeError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RangeError[T]extendsValidationErrorwithProductwithSerializable"></a>
       <a id="RangeError[T]:RangeError[T]"></a>
@@ -360,7 +369,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"> A <a href="ValidationError.html" class="extype" name="com.lucidchart.open.xtract.ValidationError">ValidationError</a> indicating the value was outside the expected range.</p>
     </li><li name="com.lucidchart.open.xtract.RecursiveXPathNode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RecursiveXPathNodeextendsXPathNodewithProductwithSerializable"></a>
       <a id="RecursiveXPathNode:RecursiveXPathNode"></a>
@@ -378,7 +387,7 @@
       </a>
     </span>
       
-    </li><li name="com.lucidchart.open.xtract.TypeError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.TypeError" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TypeError[A]extendsValidationErrorwithProductwithSerializable"></a>
       <a id="TypeError[A]:TypeError[A]"></a>
       <h4 class="signature">
@@ -394,7 +403,10 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A <a href="ValidationError.html" class="extype" name="com.lucidchart.open.xtract.ValidationError">ValidationError</a> indicating that the input wasn't the correct type.</p><div class="fullcomment"><div class="comment cmt"><p>A <a href="ValidationError.html" class="extype" name="com.lucidchart.open.xtract.ValidationError">ValidationError</a> indicating that the input wasn't the correct type.
+For example, if an integer was expected, but the input text couldn't be
+parsed as an integer.
+</p></div><dl class="paramcmts block"><dt class="param">tp</dt><dd class="cmt"><p>The Class opject for the expected type.</p></dd></dl></div>
     </li><li name="com.lucidchart.open.xtract.ValidationError" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ValidationErrorextendsParseError"></a>
       <a id="ValidationError:ValidationError"></a>
@@ -411,8 +423,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="com.lucidchart.open.xtract.XPath" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">A <a href="ParseError.html" class="extype" name="com.lucidchart.open.xtract.ParseError">ParseError</a> caused by some sort of failed validation.</p>
+    </li><li name="com.lucidchart.open.xtract.XPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="XPathextendsProductwithSerializable"></a>
       <a id="XPath:XPath"></a>
       <h4 class="signature">
@@ -428,7 +440,11 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Class representing an xpath.</p><div class="fullcomment"><div class="comment cmt"><p>Class representing an xpath.
+It can be applied to a NodeSeq to get
+a NodeSeq located at that path.
+</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>A sequence of <a href="XPathNode.html" class="extype" name="com.lucidchart.open.xtract.XPathNode">XPathNode</a>s to recursively
+walk down the XML tree to the location of the path.</p></dd></dl></div>
     </li><li name="com.lucidchart.open.xtract.XPathNode" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="XPathNodeextendsFunction[scala.xml.NodeSeq,scala.xml.NodeSeq]"></a>
       <a id="XPathNode:XPathNode"></a>
@@ -446,7 +462,7 @@
       </a>
     </span>
       
-    </li><li name="com.lucidchart.open.xtract.XmlReader" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+    </li><li name="com.lucidchart.open.xtract.XmlReader" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="XmlReader[+A]extendsAnyRef"></a>
       <a id="XmlReader[+A]:XmlReader[A]"></a>
       <h4 class="signature">
@@ -462,7 +478,11 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">An abstraction for a function that takes a NodeSeq and returns
+a <a href="ParseResult.html" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a>.</p><div class="fullcomment"><div class="comment cmt"><p>An abstraction for a function that takes a NodeSeq and returns
+a <a href="ParseResult.html" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a>.</p><p>It is used to parse XML to arbitrary scala objects, and supports combinatorial syntax
+to easily compose <a href="XmlReader.html" class="extype" name="com.lucidchart.open.xtract.XmlReader">XmlReader</a>s into new <a href="XmlReader.html" class="extype" name="com.lucidchart.open.xtract.XmlReader">XmlReader</a>s.
+</p></div></div>
     </li><li name="com.lucidchart.open.xtract.XmlReaderExtensions" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="XmlReaderExtensionsextendsIterableReaderExtensionswithDoubleReaderExtensions"></a>
       <a id="XmlReaderExtensions:XmlReaderExtensions"></a>
@@ -537,7 +557,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">The root <a href="XPath.html" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a> path.</p>
     </li><li name="com.lucidchart.open.xtract.XmlReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="XmlReader"></a>
       <a id="XmlReader:XmlReader"></a>
@@ -571,7 +591,8 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Alias for the root <a href="XPath.html" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a>
+</p>
     </li></ol>
             </div>
 
