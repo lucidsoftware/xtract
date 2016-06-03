@@ -7,7 +7,7 @@ Xtract is a scala library for deserializing XML. It is heavily inspired by the c
 To use Xtract in your sbt project add the following dependency:
 
 ``` scala
-"com.lucidchart" %% "xtract" % "1.0.1"
+"com.lucidchart" %% "xtract" % "1.1.1"
 ```
 
 There is also an `xtract-testing` artifact which provides helpful matchers and other functions for use with
