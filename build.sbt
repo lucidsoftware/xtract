@@ -4,7 +4,7 @@ scalaVersion := "2.11.7"
 
 lazy val commonSettings = Seq(
   organization := "com.lucidchart",
-  version := "1.1.1",
+  version := "1.1.1-SNAPSHOT",
   scalaVersion := "2.11.7",
   scalacOptions ++= Seq(
     "-deprecation",
