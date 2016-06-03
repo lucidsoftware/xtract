@@ -219,6 +219,19 @@ sealed trait ParseResult[+A] {
   }
 
   /**
+   * Handle both success and failure.
+   * @param onFailure Function to handle a [[ParseFailure]].
+   * @param onSuccess Function to process a successful parse.
+   */
+  def fold[B](onFailure: Seq[ParseError] => B)(onSuccess: A => B): B = {
+    if (isSuccessful) {
+      onSuccess(get)
+    } else {
+      onFailure(errors)
+    }
+  }
+
+  /**
    * Apply a PartialFunction to the result value.
    * If the `pf` isn't defined for the result value, a [[ParseFailure]] with the `otherwise` error
    * is returned.
