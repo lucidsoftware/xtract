@@ -23,5 +23,9 @@ The scaladoc API for the core functionality is available at http://lucidsoftware
 
 Scaladocs for the specs2 extensions is available at http://lucidsoftware.github.io/xtract/testing/api/.
 
+## Example
+
+An example project using xtract can be found at http://github.com/lucidsoftware/xtract-example.
+
 [1]: https://www.playframework.com/documentation/2.5.x/ScalaJsonCombinators
 [2]: https://www.playframework.com/documentation/2.5.x/api/scala/index.html#play.api.libs.json.Reads
