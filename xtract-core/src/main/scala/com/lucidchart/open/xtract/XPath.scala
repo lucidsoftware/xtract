@@ -19,6 +19,23 @@ case class RecursiveXPathNode(key: String) extends XPathNode {
   override def toString = s"//$key"
 }
 
+case class AttributedXPathNode(attr: String, value: Option[String]) extends XPathNode {
+  def apply(xml: NodeSeq): NodeSeq = xml.filter{ node =>
+    node.attribute(attr) match {
+      case Some(attrValues) => {
+        value.fold(true)(_ == attrValues.toString)
+      }
+      case None => false
+    }
+  }
+  override def toString = {
+    value match {
+      case Some(v) => s"[$attr=$v]"
+      case None => s"[$attr]"
+    }
+  }
+}
+
 /**
  * Class representing an xpath.
  * It can be applied to a NodeSeq to get
@@ -59,6 +76,38 @@ case class XPath(path: List[XPathNode] = Nil) {
    * @return a new [[XPath]] that selects the node at index `idx` in the current selection.
    */
   def apply(idx: Int) = new XPath(path :+ IdxXPathNode(idx))
+
+  /**
+   * Equivalent of "[attribute]" or "[attribute=value]" in xpath syntax
+   * @param name The name of the attribute to filter by
+   * @param value If supplied filter to only nodes which have this value for the named attribute
+   * @return a new [[XPath]] that selects only nodes which have an attribute with the given name, and
+   * optionally the supplied value.
+   */
+  def with_attr(name: String, value: Option[String] = None): XPath = new XPath(path :+ AttributedXPathNode(name, value))
+
+  /**
+   * Equivalent to `with_attr(name, Some(value))`
+   */
+  def with_attr(name: String, value: String): XPath = with_attr(name, Some(value))
+
+  /**
+   * Equivalent of "[attribute=value]" in xpath syntax.
+   * @param attr The name of the attribute to filter by
+   * @param value The value of the attribute to filter by
+   * @return a new [[XPath]] that selects only nodes which have the
+   * given value for the given attribute.
+   */
+  def apply(attr: String, value: String) = with_attr(attr, Some(value))
+
+  /**
+   * Equivalent of "[attribute]" in xpath syntax.
+   * @param attr The name of the attribute to filter by
+   * @return a new [[XPath]] that selects only nodes which have the
+   * given attribute.
+   */
+  def apply(attr: String) = with_attr(attr, None)
+
 
   /**
    * Equivalent of "/ *" in xpath syntax.
