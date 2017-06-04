@@ -25,7 +25,9 @@ after_success:
     fi
 deploy:
   api_key: $GITHUB_AUTH
-  file: target/**/*.jar
+  file:
+    - xtract-core/target/**/*.jar
+    - testing/target/**/*.jar
   file_glob: true
   provider: releases
   skip_cleanup: true
