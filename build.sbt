@@ -1,11 +1,11 @@
 name := "Xtract"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.11"
 
 lazy val commonSettings = Seq(
   organization := "com.lucidchart",
   version := "1.2.0",
-  scalaVersion := "2.11.7",
+  scalaVersion := "2.11.11",
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
@@ -13,7 +13,7 @@ lazy val commonSettings = Seq(
   ),
 
   libraryDependencies ++= Seq(
-    "org.scala-lang.modules" %% "scala-xml" % "1.0.5"
+    "org.scala-lang.modules" %% "scala-xml" % "1.0.6"
   )
 )
 
@@ -58,22 +58,23 @@ lazy val publishSettings = commonSettings ++ Seq(
   }
 )
 
-lazy val specs2Dependency = "org.specs2" %% "specs2" % "3.7"
+lazy val specs2Dependency = Seq(
+  "org.specs2" %% "specs2-core" % "3.9.1",
+  "org.specs2" %% "specs2-mock" % "3.9.1"
+)
 
 lazy val xtract = project.in(file("xtract-core")).settings(publishSettings: _*).settings(
   name := "xtract",
   description := "Library to deserialize Xml to user types.",
   libraryDependencies ++= Seq(
-    "com.typesafe.play" %% "play-functional" % "2.4.6"
+    "com.typesafe.play" %% "play-functional" % "2.6.0-RC2"
   )
 )
 
 lazy val xtractTesting = project.in(file("testing")).settings(publishSettings: _*).settings(
   name := "xtract-testing",
   description := "Specs2 matchers for xtract.",
-  libraryDependencies ++= Seq(
-    specs2Dependency
-  )
+  libraryDependencies ++= specs2Dependency
 ).dependsOn(xtract)
 
 // we have a seperate project for tests, so that we cand depend on
@@ -83,9 +84,7 @@ lazy val allTests = project.in(file("unit-tests")).settings(commonSettings: _*).
   packagedArtifacts := Map.empty,
   publish := (),
   publishLocal := (),
-  libraryDependencies ++= Seq(
-    specs2Dependency % "test"
-  )
+  libraryDependencies ++= specs2Dependency map (_ % "test")
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
 lazy val root = project.in(file(".")).aggregate(xtract, xtractTesting, allTests).settings(
