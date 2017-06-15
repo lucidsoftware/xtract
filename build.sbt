@@ -1,11 +1,12 @@
 name := "Xtract"
 
-scalaVersion := "2.11.11"
+crossScalaVersions := Seq("2.11.11", "2.12.2")
+
+scalaVersion := "2.12.2"
 
 lazy val commonSettings = Seq(
   organization := "com.lucidchart",
   version := "1.2.0",
-  scalaVersion := "2.11.11",
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
