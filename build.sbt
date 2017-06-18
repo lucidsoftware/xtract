@@ -49,9 +49,9 @@ lazy val publishSettings = commonSettings ++ Seq(
   publishMavenStyle := true,
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
 
-  publishTo <<= version { (v: String) =>
+  publishTo := {
     val nexus = "https://oss.sonatype.org/"
-    if (v.trim.endsWith("SNAPSHOT")) {
+    if (version.value.trim.endsWith("SNAPSHOT")) {
       Some("snapshots" at nexus + "content/repositories/snapshots")
     } else {
       Some("releases" at nexus + "service/local/staging/deploy/maven2")
@@ -64,12 +64,15 @@ lazy val specs2Dependency = Seq(
   "org.specs2" %% "specs2-mock" % "3.9.1"
 )
 
+def functionalDep(scalaVersion: String) = scalaVersion match {
+  case "2.12.2" => "com.typesafe.play" %% "play-functional" % "2.6.0-RC1"
+  case _ => "com.typesafe.play" %% "play-functional" % "2.5.15"
+}
+
 lazy val xtract = project.in(file("xtract-core")).settings(publishSettings: _*).settings(
   name := "xtract",
   description := "Library to deserialize Xml to user types.",
-  libraryDependencies ++= Seq(
-    "com.typesafe.play" %% "play-functional" % "2.6.0-RC2"
-  )
+  libraryDependencies += functionalDep(scalaVersion.value)
 )
 
 lazy val xtractTesting = project.in(file("testing")).settings(publishSettings: _*).settings(

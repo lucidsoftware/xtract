@@ -2,6 +2,7 @@ language: scala
 
 scala:
   - 2.11.7
+  - 2.12.2
 
 jdk:
   - oraclejdk8
@@ -21,7 +22,7 @@ after_success:
       echo $PGP_PUBLIC | base64 --decode > ~/.pgp/pubring
       echo $PGP_SECRET | base64 --decode > ~/.pgp/secring
       echo "Publishing snapshot"
-      sbt xtract/publishSigned xtractTesting/publishSigned
+      sbt ++$TRAVIS_SCALA_VERSION xtract/publishSigned xtractTesting/publishSigned
     fi
 deploy:
   api_key: $GITHUB_AUTH
