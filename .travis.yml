@@ -36,7 +36,7 @@ deploy:
     tags: true
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION test package
+  - travis_wait sbt ++$TRAVIS_SCALA_VERSION test package
 
   #Avoid unncessary cache updates
   - find $HOME/.sbt -name "*.lock" | xargs rm
