@@ -2,6 +2,8 @@
 
 Xtract is a scala library for deserializing XML. It is heavily inspired by the combinators in the [Play JSON library][1], in particular the [`Reads[T]`][2] class.
 
+See the [introductory blog post](https://www.lucidchart.com/techblog/2016/07/12/introducing-xtract-a-new-xml-deserialization-library-for-scala/).
+
 ## Usage
 
 To use Xtract in your sbt project add the following dependency:
