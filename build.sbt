@@ -6,7 +6,7 @@ scalaVersion := "2.12.2"
 
 lazy val commonSettings = Seq(
   organization := "com.lucidchart",
-  version := "1.2.0",
+  version := "1.2.1",
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
@@ -65,7 +65,7 @@ lazy val specs2Dependency = Seq(
 )
 
 def functionalDep(scalaVersion: String) = scalaVersion match {
-  case "2.12.2" => "com.typesafe.play" %% "play-functional" % "2.6.0-RC1"
+  case "2.12.2" => "com.typesafe.play" %% "play-functional" % "2.6.0"
   case _ => "com.typesafe.play" %% "play-functional" % "2.5.15"
 }
 
