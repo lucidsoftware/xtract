@@ -65,7 +65,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -78,7 +78,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -361,6 +361,23 @@ So for example, if <code>f</code> returns a <a href="ParseSuccess.html" class="e
 the final result will be a <a href="PartialParseSuccess.html" class="extype" name="com.lucidchart.open.xtract.PartialParseSuccess">PartialParseSuccess</a> containing the result from <code>f</code> and the
 errors from this.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParseResult.html" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a></dd></dl></div>
+    </li><li name="com.lucidchart.open.xtract.ParseResult#fold" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fold[B](onFailure:Seq[com.lucidchart.open.xtract.ParseError]=&gt;B)(onSuccess:A=&gt;B):B"></a>
+      <a id="fold[B]((Seq[ParseError])⇒B)((Nothing)⇒B):B"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fold</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="onFailure">onFailure: (<span class="extype" name="scala.Seq">Seq</span>[<a href="ParseError.html" class="extype" name="com.lucidchart.open.xtract.ParseError">ParseError</a>]) ⇒ <span class="extype" name="com.lucidchart.open.xtract.ParseResult.fold.B">B</span></span>)</span><span class="params">(<span name="onSuccess">onSuccess: (<span class="extype" name="scala.Nothing">Nothing</span>) ⇒ <span class="extype" name="com.lucidchart.open.xtract.ParseResult.fold.B">B</span></span>)</span><span class="result">: <span class="extype" name="com.lucidchart.open.xtract.ParseResult.fold.B">B</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.lucidchart.open.xtract.ParseFailure@fold[B](onFailure:Seq[com.lucidchart.open.xtract.ParseError]=&gt;B)(onSuccess:A=&gt;B):B" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Handle both success and failure.</p><div class="fullcomment"><div class="comment cmt"><p>Handle both success and failure.</p></div><dl class="paramcmts block"><dt class="param">onFailure</dt><dd class="cmt"><p>Function to handle a <a href="" class="extype" name="com.lucidchart.open.xtract.ParseFailure">ParseFailure</a>.</p></dd><dt class="param">onSuccess</dt><dd class="cmt"><p>Function to process a successful parse.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParseResult.html" class="extype" name="com.lucidchart.open.xtract.ParseResult">ParseResult</a></dd></dl></div>
     </li><li name="com.lucidchart.open.xtract.ParseResult#foreach" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="foreach(f:A=&gt;Unit):Unit"></a>
       <a id="foreach((Nothing)⇒Unit):Unit"></a>

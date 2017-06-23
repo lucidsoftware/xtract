@@ -71,7 +71,7 @@ walk down the XML tree to the location of the path.</p></dd></dl><div class="tog
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -84,7 +84,7 @@ walk down the XML tree to the location of the path.</p></dd></dl><div class="tog
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -265,6 +265,42 @@ walk down the XML tree to the location of the path.</p></dd></dl></div>
     </span>
       <p class="shortcomment cmt">Apply this xpath to a NodeSeq.</p><div class="fullcomment"><div class="comment cmt"><p>Apply this xpath to a NodeSeq.
 </p></div><dl class="paramcmts block"><dt class="param">xml</dt><dd class="cmt"><p>The NodeSeq to apply the path to.</p></dd><dt>returns</dt><dd class="cmt"><p>the NodeSeq of the node(s) selected by this xpath.</p></dd></dl></div>
+    </li><li name="com.lucidchart.open.xtract.XPath#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(attr:String):com.lucidchart.open.xtract.XPath"></a>
+      <a id="apply(String):XPath"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="attr">attr: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.lucidchart.open.xtract.XPath@apply(attr:String):com.lucidchart.open.xtract.XPath" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Equivalent of &quot;[attribute]&quot; in xpath syntax.</p><div class="fullcomment"><div class="comment cmt"><p>Equivalent of &quot;[attribute]&quot; in xpath syntax.</p></div><dl class="paramcmts block"><dt class="param">attr</dt><dd class="cmt"><p>The name of the attribute to filter by</p></dd><dt>returns</dt><dd class="cmt"><p>a new <a href="" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a> that selects only nodes which have the
+given attribute.</p></dd></dl></div>
+    </li><li name="com.lucidchart.open.xtract.XPath#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(attr:String,value:String):com.lucidchart.open.xtract.XPath"></a>
+      <a id="apply(String,String):XPath"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="attr">attr: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.lucidchart.open.xtract.XPath@apply(attr:String,value:String):com.lucidchart.open.xtract.XPath" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Equivalent of &quot;[attribute=value]&quot; in xpath syntax.</p><div class="fullcomment"><div class="comment cmt"><p>Equivalent of &quot;[attribute=value]&quot; in xpath syntax.</p></div><dl class="paramcmts block"><dt class="param">attr</dt><dd class="cmt"><p>The name of the attribute to filter by</p></dd><dt class="param">value</dt><dd class="cmt"><p>The value of the attribute to filter by</p></dd><dt>returns</dt><dd class="cmt"><p>a new <a href="" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a> that selects only nodes which have the
+given value for the given attribute.</p></dd></dl></div>
     </li><li name="com.lucidchart.open.xtract.XPath#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="apply(idx:Int):com.lucidchart.open.xtract.XPath"></a>
       <a id="apply(Int):XPath"></a>
@@ -637,6 +673,42 @@ walk down the XML tree to the location of the path.</p>
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="com.lucidchart.open.xtract.XPath#with_attr" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="with_attr(name:String,value:String):com.lucidchart.open.xtract.XPath"></a>
+      <a id="with_attr(String,String):XPath"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">with_attr</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.lucidchart.open.xtract.XPath@with_attr(name:String,value:String):com.lucidchart.open.xtract.XPath" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Equivalent to <code>with_attr(name, Some(value))</code>
+</p>
+    </li><li name="com.lucidchart.open.xtract.XPath#with_attr" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="with_attr(name:String,value:Option[String]):com.lucidchart.open.xtract.XPath"></a>
+      <a id="with_attr(String,Option[String]):XPath"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">with_attr</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.lucidchart.open.xtract.XPath@with_attr(name:String,value:Option[String]):com.lucidchart.open.xtract.XPath" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Equivalent of &quot;[attribute]&quot; or &quot;[attribute=value]&quot; in xpath syntax</p><div class="fullcomment"><div class="comment cmt"><p>Equivalent of &quot;[attribute]&quot; or &quot;[attribute=value]&quot; in xpath syntax</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the attribute to filter by</p></dd><dt class="param">value</dt><dd class="cmt"><p>If supplied filter to only nodes which have this value for the named attribute</p></dd><dt>returns</dt><dd class="cmt"><p>a new <a href="" class="extype" name="com.lucidchart.open.xtract.XPath">XPath</a> that selects only nodes which have an attribute with the given name, and
+optionally the supplied value.</p></dd></dl></div>
     </li></ol>
             </div>
 
