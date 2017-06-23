@@ -1,4 +1,5 @@
 SCALA_NAME = scala-2.11
+SCALA_VERSION = 2.11.11
 
 .PHONY: all pages
 all: pages package
@@ -13,6 +14,9 @@ pages: doc
 	cp -rf xtract-core/target/$(SCALA_NAME)/api/* pages/core/api
 	mkdir -p pages/testing/api
 	cp -rf testing/target/$(SCALA_NAME)/api/* pages/testing/api
+
+doc:
+	sbt ++$(SCALA_VERSION) doc
 
 
 .PHONY: %
