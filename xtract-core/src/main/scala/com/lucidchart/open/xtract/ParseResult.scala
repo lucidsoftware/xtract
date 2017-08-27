@@ -80,7 +80,7 @@ case class RangeError[T](min: T, max: T) extends ValidationError
 case class MinCountError(atLeast: Int) extends ValidationError
 
 object ParseResult {
-  import play.api.libs.functional._
+  import cats.Applicative
 
   /**
    * Combine a collection of [[ParseResult]]s into a [[ParseResult]] of a collection.
@@ -104,10 +104,9 @@ object ParseResult {
   }
 
   //Used for combinatorial syntax
-  implicit val applicativeParseResult: Applicative[ParseResult] = new Applicative[ParseResult] {
+  implicit object algebra extends Applicative[ParseResult] {
     def pure[A](a: A): ParseResult[A] = ParseSuccess(a)
-    def map[A, B](m: ParseResult[A], f: A => B): ParseResult[B] = m.map(f)
-    def apply[A, B](mf: ParseResult[A => B], ma: ParseResult[A]): ParseResult[B] = (mf, ma) match {
+    def ap[A, B](ff: ParseResult[A => B])(fa: ParseResult[A]): ParseResult[B] = (ff, fa) match {
       case (ParseSuccess(f), ParseSuccess(a)) => ParseSuccess(f(a))
       case (ParseSuccess(f), PartialParseSuccess(a, errs)) => PartialParseSuccess(f(a), errs)
       case (PartialParseSuccess(f, errs), ParseSuccess(a)) => PartialParseSuccess(f(a), errs)
@@ -115,18 +114,18 @@ object ParseResult {
       case (mf2, ParseFailure(errs)) => ParseFailure(mf2.errors ++ errs)
       case (ParseFailure(errs), ma2) => ParseFailure(errs ++ ma2.errors)
     }
-  }
 
-  implicit def alternativeParseResult(implicit a: Applicative[ParseResult]): Alternative[ParseResult] = new Alternative[ParseResult] {
-    val app = a
-    def |[A, B >: A](alt1: ParseResult[A], alt2: ParseResult[B]): ParseResult[B] = (alt1, alt2) match {
-      case (r, _) if r.isSuccessful => r
-      case (_, r) if r.isSuccessful => r
-      case (r1, r2) => ParseFailure(r1.errors ++ r2.errors)
+    override def map[A, B](fa: ParseResult[A])(f: A => B): ParseResult[B] = fa.map(f)
+
+    override def product[A, B](fa: ParseResult[A], fb: ParseResult[B]): ParseResult[(A,B)] = (fa, fb) match {
+      case (ParseSuccess(a), ParseSuccess(b)) => ParseSuccess((a, b))
+      case (ParseSuccess(a), PartialParseSuccess(b, errs)) => PartialParseSuccess((a, b), errs)
+      case (PartialParseSuccess(a, errs), ParseSuccess(b)) => PartialParseSuccess((a, b), errs)
+      case (PartialParseSuccess(a, errs1), PartialParseSuccess(b, errs2)) => PartialParseSuccess((a, b), errs1 ++ errs2)
+      case (a, ParseFailure(errs)) => ParseFailure(a.errors ++ errs)
+      case (ParseFailure(errs), b) => ParseFailure(errs ++ b.errors)
     }
-    def empty: ParseResult[Nothing] = ParseFailure()
   }
-
 }
 
 /**
@@ -268,6 +267,28 @@ sealed trait ParseResult[+A] {
   }
 
   /**
+   * @return this if this is successful, otherwise return other if other is
+   * successful, and a `ParseFailure` containing errors from both if both failed.
+   */
+  def or[B >: A](other: ParseResult[B]): ParseResult[B] = {
+    if (isSuccessful) {
+      this
+    } else if (other.isSuccessful) {
+      other
+    } else {
+      ParseFailure(this.errors ++ other.errors)
+    }
+  }
+
+  /**
+   * Alias for `or`
+   */
+  def |[B >: A](other: ParseResult[B]) = or(other)
+
+  /**
+   * Like `or`, but take `otherwise` as a by-name parameter, and
+   * don't combine errors from both.
+   *
    * @return this if this is successful otherwise return `otherwise`.
    */
   def orElse[B >: A](otherwise: => ParseResult[B]): ParseResult[B] = if (isSuccessful) this else otherwise
