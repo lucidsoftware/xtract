@@ -30,8 +30,8 @@ case class AttributedXPathNode(attr: String, value: Option[String]) extends XPat
   }
   override def toString = {
     value match {
-      case Some(v) => s"[$attr=$v]"
-      case None => s"[$attr]"
+      case Some(v) => s"[@$attr=$v]"
+      case None => s"[@$attr]"
     }
   }
 }
@@ -60,7 +60,7 @@ case class XPath(path: List[XPathNode] = Nil) {
    */
   def \\(child: String) = XPath(path :+ RecursiveXPathNode(child))
   /**
-   * Equivalent of "@attribute" in xpath.
+   * Equivalent of "&#64;attribute" in xpath.
    * @param attribute The name of the attribute to select
    * @return a new [[XPath]] that selects the attribute node with
    *   the given name
@@ -78,7 +78,7 @@ case class XPath(path: List[XPathNode] = Nil) {
   def apply(idx: Int) = new XPath(path :+ IdxXPathNode(idx))
 
   /**
-   * Equivalent of "[attribute]" or "[attribute=value]" in xpath syntax
+   * Equivalent of "[&#64;attribute]" or "[&#64;attribute=value]" in xpath syntax
    * @param name The name of the attribute to filter by
    * @param value If supplied filter to only nodes which have this value for the named attribute
    * @return a new [[XPath]] that selects only nodes which have an attribute with the given name, and
@@ -92,7 +92,7 @@ case class XPath(path: List[XPathNode] = Nil) {
   def with_attr(name: String, value: String): XPath = with_attr(name, Some(value))
 
   /**
-   * Equivalent of "[attribute=value]" in xpath syntax.
+   * Equivalent of "[&#64;attribute=value]" in xpath syntax.
    * @param attr The name of the attribute to filter by
    * @param value The value of the attribute to filter by
    * @return a new [[XPath]] that selects only nodes which have the
@@ -101,7 +101,7 @@ case class XPath(path: List[XPathNode] = Nil) {
   def apply(attr: String, value: String) = with_attr(attr, Some(value))
 
   /**
-   * Equivalent of "[attribute]" in xpath syntax.
+   * Equivalent of "[&#64;attribute]" in xpath syntax.
    * @param attr The name of the attribute to filter by
    * @return a new [[XPath]] that selects only nodes which have the
    * given attribute.
