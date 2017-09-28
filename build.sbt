@@ -1,16 +1,17 @@
 name := "Xtract"
 
-val _defaultScala = "2.12.3"
-val _scalaVersions = Seq("2.11.11", _defaultScala)
+val SCALA_211 = "2.11.11"
+val SCALA_212 = "2.12.3"
 
-crossScalaVersions := _scalaVersions
-scalaVersion := _defaultScala
-
-lazy val commonSettings = Seq(
+lazy val baseSettings = Seq(
   organization := "com.lucidchart",
   version := "1.3.1-SNAPSHOT",
-  scalaVersion := _defaultScala,
-  crossScalaVersions := _scalaVersions,
+  scalaVersion := SCALA_212,
+  crossScalaVersions := Seq(SCALA_211, SCALA_212),
+  fork in test := true
+)
+
+lazy val commonSettings = baseSettings ++ Seq(
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
@@ -69,7 +70,7 @@ lazy val specs2Dependency = Seq(
 )
 
 def functionalDep(scalaVersion: String) = scalaVersion match {
-  case "2.12.3" => "com.typesafe.play" %% "play-functional" % "2.6.6"
+  case SCALA_212 => "com.typesafe.play" %% "play-functional" % "2.6.6"
   case _ => "com.typesafe.play" %% "play-functional" % "2.5.15"
 }
 
@@ -95,7 +96,7 @@ lazy val allTests = project.in(file("unit-tests")).settings(commonSettings: _*).
   libraryDependencies ++= specs2Dependency map (_ % "test")
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
-lazy val root = project.in(file(".")).aggregate(xtract, xtractTesting, allTests).settings(
+lazy val root = project.in(file(".")).aggregate(xtract, xtractTesting, allTests).settings(baseSettings: _*).settings(
   publishArtifact := false
 )
 
