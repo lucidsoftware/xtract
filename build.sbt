@@ -1,6 +1,6 @@
 name := "Xtract"
 
-val _defaultScala = "2.12.2"
+val _defaultScala = "2.12.3"
 val _scalaVersions = Seq("2.11.11", _defaultScala)
 
 crossScalaVersions := _scalaVersions
@@ -69,7 +69,7 @@ lazy val specs2Dependency = Seq(
 )
 
 def functionalDep(scalaVersion: String) = scalaVersion match {
-  case "2.12.2" => "com.typesafe.play" %% "play-functional" % "2.6.0"
+  case "2.12.3" => "com.typesafe.play" %% "play-functional" % "2.6.6"
   case _ => "com.typesafe.play" %% "play-functional" % "2.5.15"
 }
 
