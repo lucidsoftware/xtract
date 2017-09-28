@@ -37,6 +37,10 @@ deploy:
   on:
     tags: true
 
+script:
+  - sbt ++$TRAVIS_SCALA_VERSION compile
+  - sbt -debug ++$TRAVIS_SCALA_VERSION test
+
 install: sbt ++$TRAVIS_SCALA_VERSION update
 before_cache:
   #Avoid unncessary cache updates
