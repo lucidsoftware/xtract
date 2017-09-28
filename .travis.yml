@@ -39,7 +39,8 @@ install:
   - sbt ++$TRAVIS_SCALA_VERSION update
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION test package
+  - sbt ++$TRAVIS_SCALA_VERSION test
+  - sbt ++$TRAVIS_SCALA_VERSION package
 
   #Avoid unncessary cache updates
   - find $HOME/.sbt -name "*.lock" | xargs rm
