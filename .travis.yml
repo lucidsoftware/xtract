@@ -13,7 +13,7 @@ sudo: false
 cache:
   directories:
     - $HOME/.ivy2/cache
-    - $HOME/.sbt/boot/
+    - $HOME/.sbt/
 
 after_success:
   - sbt ++$TRAVIS_SCALA_VERSION package
@@ -39,5 +39,5 @@ deploy:
 
 before_cache:
   #Avoid unncessary cache updates
-  - find $HOME/.sbt/boot -name "*.lock" | xargs rm
-  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+  - find $HOME/.ivy2 -name "ivydata-*.properties" -print -delete
+  - find $HOME/.sbt  -name "*.lock" -print -delete
