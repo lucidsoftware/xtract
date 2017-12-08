@@ -5,7 +5,7 @@ val SCALA_212 = "2.12.3"
 
 lazy val baseSettings = Seq(
   organization := "com.lucidchart",
-  version := sys.props.getOrElse("0-SNAPSHOT")
+  version := sys.props.getOrElse("build.version", "0-SNAPSHOT")
   scalaVersion := SCALA_212,
   crossScalaVersions := Seq(SCALA_211, SCALA_212),
   fork in test := true
