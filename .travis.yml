@@ -15,7 +15,7 @@ cache:
     - $HOME/.ivy2/cache
     - $HOME/.sbt/
 
-after_success:
+before_deploy:
   - sbt ++$TRAVIS_SCALA_VERSION package
   - |
     if [ -n "$TRAVIS_TAG" ] || ([ "$TRAVIS_PULL_REQUEST" == false ] && [ "$TRAVIS_BRANCH" == master ])
@@ -36,6 +36,9 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+
+before_script:
+  - '[ "$TRAVIS_PULL_REQUEST" != false ] || export SBT_OPTS=-Dbuild.version=${TRAVIS_TAG:-$TRAVIS_BRANCH-SNAPSHOT}'
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION compile
