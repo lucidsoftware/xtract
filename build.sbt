@@ -7,7 +7,7 @@ inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
   developers ++= List(
     Developer("tmccombs", "Thayne McCombs", "", url("https://github.com/tmccombs")),
-    Developer("", "Andy Hurd", "", url("")),
+    Developer("", "Andy Hurd", "", null),
   ),
   licenses += "Apache License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"),
   homepage := Some(url("https://github.com/lucidsoftware/xtract")),
