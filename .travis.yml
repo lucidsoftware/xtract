@@ -15,17 +15,19 @@ cache:
     - $HOME/.ivy2/cache
     - $HOME/.sbt/
 
-before_deploy:
-  - sbt ++$TRAVIS_SCALA_VERSION package
+after_success:
   - |
-    if [ -n "$TRAVIS_TAG" ] || ([ "$TRAVIS_PULL_REQUEST" == false ] && [ "$TRAVIS_BRANCH" == master ])
-    then
-      mkdir ~/.pgp
-      echo $PGP_PUBLIC | base64 --decode > ~/.pgp/pubring
-      echo $PGP_SECRET | base64 --decode > ~/.pgp/secring
-      echo "Publishing snapshot"
-      sbt ++$TRAVIS_SCALA_VERSION xtract/publishSigned xtractTesting/publishSigned
+    if [ "$TRAVIS_SECURE_ENV_VARS" == true ]; then
+      echo "$PGP_SECRET" | base64 --decode | gpg --import
+      if [ -z "$TRAVIS_TAG" ]; then
+        echo "Publishing snapshot"
+        sbt ++$TRAVIS_SCALA_VERSION publishSigned
+      else
+        echo "Publishing package"
+        sbt ++$TRAVIS_SCALA_VERSION "sonatypeOpen xtract-$TRAVIS_TAG" publishSigned sonatypeReleaseAll
+      fi
     fi
+
 deploy:
   api_key: $GITHUB_AUTH
   file:
@@ -41,7 +43,7 @@ before_script:
   - '[ "$TRAVIS_PULL_REQUEST" != false ] || export SBT_OPTS=-Dbuild.version=${TRAVIS_TAG:-$TRAVIS_BRANCH-SNAPSHOT}'
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION compile
+  - sbt ++$TRAVIS_SCALA_VERSION compile packageBin packageDoc packageSrc
   - sbt -debug ++$TRAVIS_SCALA_VERSION test
 
 install: sbt ++$TRAVIS_SCALA_VERSION update
