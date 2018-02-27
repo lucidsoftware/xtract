@@ -1,7 +1,7 @@
 name := "Xtract"
 
-val SCALA_211 = "2.11.11"
-val SCALA_212 = "2.12.3"
+val SCALA_211 = "2.11.12"
+val SCALA_212 = "2.12.4"
 
 inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
@@ -26,8 +26,8 @@ inThisBuild(Seq(
 ))
 
 lazy val specs2Dependency = Seq(
-  "org.specs2" %% "specs2-core" % "3.9.1",
-  "org.specs2" %% "specs2-mock" % "3.9.1"
+  "org.specs2" %% "specs2-core" % "4.0.3",
+  "org.specs2" %% "specs2-mock" % "4.0.3"
 )
 
 def functionalDep(scalaVersion: String) = scalaVersion match {
