@@ -1,8 +1,5 @@
 name := "Xtract"
 
-val SCALA_211 = "2.11.11"
-val SCALA_212 = "2.12.3"
-
 inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
   developers ++= List(
@@ -12,11 +9,10 @@ inThisBuild(Seq(
   licenses += "Apache License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"),
   homepage := Some(url("https://github.com/lucidsoftware/xtract")),
   organization := "com.lucidchart",
-  scalaVersion := SCALA_212,
-  crossScalaVersions := Seq(SCALA_211, SCALA_212),
   scmInfo := Some(ScmInfo(url("https://github.com/lucidsoftware/xtract"), "scm:git:git@github.com:lucidsoftware/xtract.git")),
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
   fork in test := true,
+  useGpg := true,
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
@@ -26,13 +22,16 @@ inThisBuild(Seq(
 ))
 
 lazy val specs2Dependency = Seq(
-  "org.specs2" %% "specs2-core" % "3.9.1",
-  "org.specs2" %% "specs2-mock" % "3.9.1"
+  "org.specs2" %% "specs2-core" % "4.0.3",
+  "org.specs2" %% "specs2-mock" % "4.0.3"
 )
 
-def functionalDep(scalaVersion: String) = scalaVersion match {
-  case SCALA_212 => "com.typesafe.play" %% "play-functional" % "2.6.6"
-  case _ => "com.typesafe.play" %% "play-functional" % "2.5.15"
+def functionalDep(scalaVersion: String) = {
+  if (scalaVersion.startsWith("2.12")) {
+    "com.typesafe.play" %% "play-functional" % "2.6.8"
+  } else {
+    "com.typesafe.play" %% "play-functional" % "2.5.16"
+  }
 }
 
 lazy val xtract = project.in(file("xtract-core")).settings(

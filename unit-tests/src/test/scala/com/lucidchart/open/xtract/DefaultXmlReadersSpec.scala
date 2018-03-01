@@ -5,6 +5,10 @@ import scala.xml._
 
 class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReaders {
 
+  // Don't allow parallel execution, because that leads to a deadlock
+  // See https://github.com/mockito/mockito/issues/1067
+  sequential
+
   case class FakeParseError() extends ParseError
 
   val empty = NodeSeq.fromSeq(Nil)
