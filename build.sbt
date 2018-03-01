@@ -55,9 +55,6 @@ lazy val allTests = project.in(file("unit-tests")).settings(
   packagedArtifacts := Map.empty,
   publish := {},
   publishLocal := {},
-  // parallel execution leads to a deadlock,
-  // see https://github.com/mockito/mockito/issues/1067
-  parallelExecution := false,
   libraryDependencies ++= specs2Dependency map (_ % "test")
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
