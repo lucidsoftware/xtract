@@ -38,7 +38,7 @@ lazy val xtract = project.in(file("xtract-core")).settings(
   name := "xtract",
   description := "Library to deserialize Xml to user types.",
   libraryDependencies ++= Seq(
-    "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
+    "org.scala-lang.modules" %% "scala-xml" % "1.1.0",
     functionalDep(scalaVersion.value),
   )
 )
