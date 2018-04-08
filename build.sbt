@@ -22,8 +22,8 @@ inThisBuild(Seq(
 ))
 
 lazy val specs2Dependency = Seq(
-  "org.specs2" %% "specs2-core" % "4.0.3",
-  "org.specs2" %% "specs2-mock" % "4.0.3"
+  "org.specs2" %% "specs2-core" % "4.0.4",
+  "org.specs2" %% "specs2-mock" % "4.0.4"
 )
 
 def functionalDep(scalaVersion: String) = {

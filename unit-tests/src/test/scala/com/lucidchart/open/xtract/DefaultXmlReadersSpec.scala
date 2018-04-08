@@ -7,7 +7,7 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
 
   // Don't allow parallel execution, because that leads to a deadlock
   // See https://github.com/mockito/mockito/issues/1067
-  sequential
+  //sequential
 
   case class FakeParseError() extends ParseError
 
