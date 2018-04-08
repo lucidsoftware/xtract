@@ -39,10 +39,15 @@ lazy val xtract = project.in(file("xtract-core")).settings(
   description := "Library to deserialize Xml to user types.",
   libraryDependencies ++= Seq(
     "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-    "org.scala-lang" % "scala-reflect" % scalaVersion.value,
     functionalDep(scalaVersion.value),
   )
 )
+
+lazy val xtractMacros = project.in(file("macros")).settings(
+  name := "xtract-macros",
+  description := "Macros for creating XmlReaders.",
+  libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
+).dependsOn(xtract)
 
 lazy val xtractTesting = project.in(file("testing")).settings(
   name := "xtract-testing",
@@ -60,7 +65,7 @@ lazy val allTests = project.in(file("unit-tests")).settings(
   libraryDependencies ++= specs2Dependency map (_ % "test")
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
-lazy val root = project.in(file(".")).aggregate(xtract, xtractTesting, allTests).settings(
+lazy val root = project.in(file(".")).aggregate(xtract, xtractMacros, xtractTesting, allTests).settings(
   publishArtifact := false
 )
 

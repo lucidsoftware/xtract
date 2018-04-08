@@ -1,5 +1,6 @@
-package com.lucidchart.open.xtract
+package com.lucidchart.open.xtract.meta
 
+import com.lucidchart.open.xtract.{XPath, XmlReader}
 import scala.reflect.macros.blackbox.Context
 
 /**
