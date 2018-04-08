@@ -11,7 +11,6 @@ inThisBuild(Seq(
   organization := "com.lucidchart",
   scmInfo := Some(ScmInfo(url("https://github.com/lucidsoftware/xtract"), "scm:git:git@github.com:lucidsoftware/xtract.git")),
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
-  fork in test := true,
   useGpg := true,
   scalacOptions ++= Seq(
     "-deprecation",
@@ -37,9 +36,15 @@ lazy val xtract = project.in(file("xtract-core")).settings(
   name := "xtract",
   description := "Library to deserialize Xml to user types.",
   libraryDependencies ++= catsDependency ++ Seq(
-    "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
+    "org.scala-lang.modules" %% "scala-xml" % "1.1.0"
   )
 )
+
+lazy val xtractMacros = project.in(file("macros")).settings(
+  name := "xtract-macros",
+  description := "Macros for creating XmlReaders.",
+  libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
+).dependsOn(xtract)
 
 lazy val xtractTesting = project.in(file("testing")).settings(
   name := "xtract-testing",
@@ -57,7 +62,7 @@ lazy val allTests = project.in(file("unit-tests")).settings(
   libraryDependencies ++= specs2Dependency map (_ % "test")
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
-lazy val root = project.in(file(".")).aggregate(xtract, xtractTesting, allTests).settings(
+lazy val root = project.in(file(".")).aggregate(xtract, xtractMacros, xtractTesting, allTests).settings(
   publishArtifact := false
 )
 
