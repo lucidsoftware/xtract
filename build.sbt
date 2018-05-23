@@ -25,20 +25,18 @@ lazy val specs2Dependency = Seq(
   "org.specs2" %% "specs2-mock" % "4.0.3"
 )
 
-def functionalDep(scalaVersion: String) = {
-  if (scalaVersion.startsWith("2.12")) {
-    "com.typesafe.play" %% "play-functional" % "2.6.8"
-  } else {
-    "com.typesafe.play" %% "play-functional" % "2.5.16"
-  }
-}
+val catsVersion = "1.0.1"
+lazy val catsDependency = Seq(
+  "org.typelevel" %% "cats-macros" % catsVersion,
+  "org.typelevel" %% "cats-kernel" % catsVersion,
+  "org.typelevel" %% "cats-core" % catsVersion
+)
 
 lazy val xtract = project.in(file("xtract-core")).settings(
   name := "xtract",
   description := "Library to deserialize Xml to user types.",
-  libraryDependencies ++= Seq(
-    "org.scala-lang.modules" %% "scala-xml" % "1.1.0",
-    functionalDep(scalaVersion.value),
+  libraryDependencies ++= catsDependency ++ Seq(
+    "org.scala-lang.modules" %% "scala-xml" % "1.1.0"
   )
 )
 

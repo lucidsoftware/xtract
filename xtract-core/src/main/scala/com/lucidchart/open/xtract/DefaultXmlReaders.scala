@@ -94,7 +94,7 @@ trait DefaultXmlReaders {
    * Wrap a value in an [[XmlReader]].
    * @return An [[XmlReader]] that always succeeds with `a`
    */
-  def pure[A](a: => A) = XmlReader.applicative.pure(a)
+  def pure[A](a: => A) = XmlReader.algebra.pure(a)
 
   /**
    * @return An [[XmlReader]] that always fails with `error`
