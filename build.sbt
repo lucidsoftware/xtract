@@ -15,7 +15,8 @@ inThisBuild(Seq(
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
-    "-language:higherKinds"
+    "-language:higherKinds",
+    "-Ypartial-unification"
   ),
   //isSnapshot := version.value.trim.endsWith("SNAPSHOT")
 ))
