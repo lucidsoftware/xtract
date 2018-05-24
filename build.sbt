@@ -11,6 +11,7 @@ inThisBuild(Seq(
   organization := "com.lucidchart",
   scmInfo := Some(ScmInfo(url("https://github.com/lucidsoftware/xtract"), "scm:git:git@github.com:lucidsoftware/xtract.git")),
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
+  publishMavenStyle := true,
   useGpg := true,
   scalacOptions ++= Seq(
     "-deprecation",
@@ -18,7 +19,12 @@ inThisBuild(Seq(
     "-language:higherKinds",
     "-Ypartial-unification"
   ),
-  //isSnapshot := version.value.trim.endsWith("SNAPSHOT")
+  isSnapshot := version.value.trim.endsWith("SNAPSHOT"),
+  publishTo := Some(if (isSnapshot.value) {
+      Opts.resolver.sonatypeSnapshots
+    } else {
+      Opts.resolver.sonatypeStaging
+    })
 ))
 
 lazy val specs2Dependency = Seq(
