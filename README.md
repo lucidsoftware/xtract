@@ -9,14 +9,14 @@ See the [introductory blog post](https://www.lucidchart.com/techblog/2016/07/12/
 To use Xtract in your sbt project add the [following dependency](https://mvnrepository.com/artifact/com.lucidchart/xtract):
 
 ``` scala
-"com.lucidchart" %% "xtract" % "1.3.1"
+"com.lucidchart" %% "xtract" % "2.0.0"
 ```
 
 There is also an `xtract-testing` artifact which provides helpful matchers and other functions for use with
 specs2. To use in your test you can add the [following sbt dependency](https://mvnrepository.com/artifact/com.lucidchart/xtract-testing):
 
 ``` scala
-"com.lucidchart" %% "xtract-testing" % "1.3.1" % "test"
+"com.lucidchart" %% "xtract-testing" % "2.0.0" % "test"
 ```
 
 ## Documentation
