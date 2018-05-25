@@ -21,9 +21,9 @@ specs2. To use in your test you can add the [following sbt dependency](https://m
 
 ## Documentation
 
-The scaladoc API for the core functionality is available at http://lucidsoftware.github.io/xtract/core/api/.
+The scaladoc API for the core functionality is available at http://lucidsoftware.github.io/xtract/core/api/com/lucidchart/open/xtract/index.html.
 
-Scaladocs for the specs2 extensions is available at http://lucidsoftware.github.io/xtract/testing/api/.
+Scaladocs for the specs2 extensions is available at http://lucidsoftware.github.io/xtract/testing/api/com/lucidchart/open/xtract/index.html.
 
 ## Example
 
