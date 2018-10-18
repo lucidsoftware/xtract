@@ -25,7 +25,7 @@ after_success:
         sbt ++$TRAVIS_SCALA_VERSION publishSigned
       else
         echo "Publishing package"
-        sbt ++$TRAVIS_SCALA_VERSION "sonatypeOpen xtract-$TRAVIS_TAG" publishSigned sonatypeReleaseAll
+        sbt ++$TRAVIS_SCALA_VERSION "sonatypeOpen xtract-$TRAVIS_TAG-$TRAVIS_SCALA_VERSION" publishSigned sonatypeReleaseAll
       fi
     fi
 
