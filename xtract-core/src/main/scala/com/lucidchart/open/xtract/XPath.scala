@@ -60,8 +60,8 @@ case class XPath(path: List[XPathNode] = Nil) {
   def \(child: String) = XPath(path :+ KeyXPathNode(child))
 
   /**
-    * A wildcard label for a child and matches all nodes that contain the string.
-    * @param child The matcher for the label of the child(ren).
+    * A regex that matches all nodes that contain the string.
+    * @param regex The regex for the label of the child(ren).
     * @return a new [[XPath]] pointing to all children of this [[XPath]]
     *   with the given tag label.
     */
