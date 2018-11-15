@@ -1,5 +1,6 @@
 package com.lucidchart.open.xtract
 
+import scala.util.matching.Regex
 import scala.xml.{Node, NodeSeq}
 
 sealed trait XPathNode extends Function[NodeSeq, NodeSeq]
@@ -17,6 +18,11 @@ case class KeyXPathNode(key: String) extends XPathNode {
 case class RecursiveXPathNode(key: String) extends XPathNode {
   def apply(xml: NodeSeq): NodeSeq = xml \\ key
   override def toString = s"//$key"
+}
+
+case class WildCardXPathNode(regex: Regex) extends XPathNode {
+  def apply(xml: NodeSeq): NodeSeq = (xml \\ "_").filter(node => node.label.matches(regex.regex))
+  override def toString = s"/?$regex"
 }
 
 case class AttributedXPathNode(attr: String, value: Option[String]) extends XPathNode {
@@ -52,6 +58,15 @@ case class XPath(path: List[XPathNode] = Nil) {
    *   with the given tag label.
    */
   def \(child: String) = XPath(path :+ KeyXPathNode(child))
+
+  /**
+    * A wildcard label for a child and matches all nodes that contain the string.
+    * @param child The matcher for the label of the child(ren).
+    * @return a new [[XPath]] pointing to all children of this [[XPath]]
+    *   with the given tag label.
+    */
+  def \?(regex: Regex) = XPath(path :+ WildCardXPathNode(regex))
+
   /**
    * Equivalent of "//child" in xpath.
    * @param child The name of the label of the descendents.
@@ -107,7 +122,6 @@ case class XPath(path: List[XPathNode] = Nil) {
    * given attribute.
    */
   def apply(attr: String) = with_attr(attr, None)
-
 
   /**
    * Equivalent of "/ *" in xpath syntax.
