@@ -12,20 +12,31 @@ class SyntaxSpec extends Specification with ParseResultMatchers {
       <a>A</a>
       <b>B</b>
       <c>C</c>
+      <d1>d1</d1>
+      <d2>d2</d2>
+      <e1>e1</e1>
+      <e3>e3</e3>
     </doc>
     """)
 
-  case class ABC(a: String, b: String, c: String)
+
+  implicit def listXmlReader[A](implicit r: XmlReader[A]): XmlReader[List[A]] = XmlReader { xml =>
+    ParseResult.combine(xml.map(r.read))
+  }
+
+  case class ABC(a: String, b: String, c: String, ds:List[String],es:List[String])
 
   "xtract syntax" should {
     "combine readers" in {
       val reader = (
         (__ \ "a").read[String],
         (__ \ "b").read[String],
-        (__ \ "c").read[String]
+        (__ \ "c").read[String],
+        (__ \\? "d.".r).read[List[String]],
+        (__ \? "e.".r).read[List[String]]
       ).mapN(ABC.apply _)
 
-      reader.read(sample1) must beParseSuccess(ABC("A", "B", "C"))
+      reader.read(sample1) must beParseSuccess(ABC("A", "B", "C", List("d1","d2"), List("e1", "e3")))
     }
 
     "work with alternatives" in {
