@@ -20,8 +20,13 @@ case class RecursiveXPathNode(key: String) extends XPathNode {
   override def toString = s"//$key"
 }
 
-case class WildCardXPathNode(regex: Regex) extends XPathNode {
+case class RecursiveWildCardXPathNode(regex: Regex) extends XPathNode {
   def apply(xml: NodeSeq): NodeSeq = (xml \\ "_").filter(node => node.label.matches(regex.regex))
+  override def toString = s"//?$regex"
+}
+
+case class WildCardXPathNode(regex: Regex) extends XPathNode {
+  def apply(xml: NodeSeq): NodeSeq = (xml \ "_").filter(node => node.label.matches(regex.regex))
   override def toString = s"/?$regex"
 }
 
@@ -58,6 +63,14 @@ case class XPath(path: List[XPathNode] = Nil) {
    *   with the given tag label.
    */
   def \(child: String) = XPath(path :+ KeyXPathNode(child))
+
+  /**
+    * A regex that matches recursively all nodes that contain the string.
+    * @param regex The regex for the label of the child(ren).
+    * @return a new [[XPath]] pointing to all children of this [[XPath]]
+    *   with the given tag label.
+    */
+  def \\?(regex: Regex) = XPath(path :+ RecursiveWildCardXPathNode(regex))
 
   /**
     * A regex that matches all nodes that contain the string.

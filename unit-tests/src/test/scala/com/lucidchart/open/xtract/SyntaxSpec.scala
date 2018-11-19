@@ -14,6 +14,8 @@ class SyntaxSpec extends Specification with ParseResultMatchers {
       <c>C</c>
       <d1>d1</d1>
       <d2>d2</d2>
+      <e1>e1</e1>
+      <e3>e3</e3>
     </doc>
     """)
 
@@ -22,7 +24,7 @@ class SyntaxSpec extends Specification with ParseResultMatchers {
     ParseResult.combine(xml.map(r.read))
   }
 
-  case class ABC(a: String, b: String, c: String, texts:List[String])
+  case class ABC(a: String, b: String, c: String, ds:List[String],es:List[String])
 
   "xtract syntax" should {
     "combine readers" in {
@@ -30,10 +32,11 @@ class SyntaxSpec extends Specification with ParseResultMatchers {
         (__ \ "a").read[String],
         (__ \ "b").read[String],
         (__ \ "c").read[String],
-        (__ \? "d.".r).read[List[String]]
+        (__ \\? "d.".r).read[List[String]],
+        (__ \? "e.".r).read[List[String]]
       ).mapN(ABC.apply _)
 
-      reader.read(sample1) must beParseSuccess(ABC("A", "B", "C", List("d1","d2")))
+      reader.read(sample1) must beParseSuccess(ABC("A", "B", "C", List("d1","d2"), List("e1", "e3")))
     }
 
     "work with alternatives" in {
