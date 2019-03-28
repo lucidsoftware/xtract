@@ -32,7 +32,7 @@ lazy val specs2Dependency = Seq(
   "org.specs2" %% "specs2-mock" % "4.0.3"
 )
 
-val catsVersion = "1.0.1"
+val catsVersion = "1.+"
 lazy val catsDependency = Seq(
   "org.typelevel" %% "cats-macros" % catsVersion,
   "org.typelevel" %% "cats-kernel" % catsVersion,
