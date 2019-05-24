@@ -81,7 +81,7 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
   }
 
   "intReader" should {
-    "parse double from node" in {
+    "parse int from node" in {
       intReader.read(<xml>22</xml>) must beParseSuccess(22)
     }
 
@@ -99,6 +99,31 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
 
     "give multiple matches error for multiple matches" in {
       intReader.read(multiple) must beParseFailure(Seq(
+        MultipleMatchesError()
+      ))
+    }
+  }
+
+  "longReader" should {
+    "parse long from node" in {
+      longReader.read(<xml>22</xml>) must beParseSuccess(22L)
+      longReader.read(<xml>5000000000</xml>) must beParseSuccess(5000000000L)
+    }
+
+    "give type error for bad format" in {
+      longReader.read(<xml>abc</xml>) must beParseFailure(Seq(
+        TypeError(Long.getClass)
+      ))
+    }
+
+    "give empty error for missing node" in {
+      longReader.read(empty) must beParseFailure(Seq(
+        EmptyError()
+      ))
+    }
+
+    "give multiple matches error for multiple matches" in {
+      longReader.read(multiple) must beParseFailure(Seq(
         MultipleMatchesError()
       ))
     }
