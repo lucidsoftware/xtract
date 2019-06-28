@@ -56,6 +56,19 @@ trait DefaultXmlReaders {
   }
 
   /**
+   * [[XmlReader]] that gets the text of a single node as a long
+   */
+  implicit val longReader: XmlReader[Long] = XmlReader { xml =>
+    getNode(xml).flatMap { node =>
+      try {
+        ParseSuccess(node.text.toLong)
+      } catch {
+        case _: NumberFormatException => ParseFailure(TypeError(Long.getClass))
+      }
+    }
+  }
+
+  /**
    *  [[XmlReader]] that gets the text of a single node as a boolean
    */
   implicit val booleanReader: XmlReader[Boolean] = XmlReader { xml =>
