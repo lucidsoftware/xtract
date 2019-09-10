@@ -1,5 +1,5 @@
-SCALA_NAME = scala-2.11
-SCALA_VERSION = 2.11.11
+SCALA_NAME = scala-2.12
+SCALA_VERSION = 2.12.8
 
 .PHONY: all pages
 all: pages package
