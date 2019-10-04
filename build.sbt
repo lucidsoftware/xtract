@@ -1,5 +1,17 @@
 name := "Xtract"
 
+def versionedScalacOptions(scalaVersion: String) = {
+  Seq(
+    "-deprecation",
+    "-feature",
+    "-language:higherKinds",
+  ) ++ (if (scalaVersion.startsWith("2.13")) {
+    Nil
+  } else {
+    Seq("-Ypartial-unification")
+  })
+}
+
 inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
   developers ++= List(
@@ -13,12 +25,7 @@ inThisBuild(Seq(
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
   publishMavenStyle := true,
   useGpg := true,
-  scalacOptions ++= Seq(
-    "-deprecation",
-    "-feature",
-    "-language:higherKinds",
-    "-Ypartial-unification"
-  ),
+  scalacOptions ++= versionedScalacOptions(scalaVersion.value),
   isSnapshot := version.value.trim.endsWith("SNAPSHOT"),
   publishTo := Some(if (isSnapshot.value) {
       Opts.resolver.sonatypeSnapshots
@@ -28,11 +35,11 @@ inThisBuild(Seq(
 ))
 
 lazy val specs2Dependency = Seq(
-  "org.specs2" %% "specs2-core" % "4.0.3",
-  "org.specs2" %% "specs2-mock" % "4.0.3"
+  "org.specs2" %% "specs2-core" % "4.7.1",
+  "org.specs2" %% "specs2-mock" % "4.7.1"
 )
 
-val catsVersion = "1.+"
+val catsVersion = "2.+"
 lazy val catsDependency = Seq(
   "org.typelevel" %% "cats-macros" % catsVersion,
   "org.typelevel" %% "cats-kernel" % catsVersion,
@@ -43,7 +50,7 @@ lazy val xtract = project.in(file("xtract-core")).settings(
   name := "xtract",
   description := "Library to deserialize Xml to user types.",
   libraryDependencies ++= catsDependency ++ Seq(
-    "org.scala-lang.modules" %% "scala-xml" % "1.1.0"
+    "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
   )
 )
 
