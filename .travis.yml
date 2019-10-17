@@ -21,13 +21,7 @@ after_success:
   - |
     if [ "$TRAVIS_SECURE_ENV_VARS" == true ]; then
       echo "$PGP_SECRET" | base64 --decode | gpg --import
-      if [ -z "$TRAVIS_TAG" ]; then
-        echo "Publishing snapshot"
-        sbt ++$TRAVIS_SCALA_VERSION publishSigned
-      else
-        echo "Publishing package"
-        sbt ++$TRAVIS_SCALA_VERSION "sonatypeOpen xtract-$TRAVIS_TAG-$TRAVIS_SCALA_VERSION" publishSigned sonatypeBundleRelease
-      fi
+      sbt ++$TRAVIS_SCALA_VERSION "; publishSigned; sonatypeBundleRelease"
     fi
 
 deploy:

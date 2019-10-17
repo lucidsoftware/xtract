@@ -27,6 +27,7 @@ inThisBuild(Seq(
   useGpg := true,
   scalacOptions ++= versionedScalacOptions(scalaVersion.value),
   isSnapshot := version.value.trim.endsWith("SNAPSHOT"),
+  sonatypeSessionName := s"[sbt-sonatype] ${name.value}-${scalaBinaryVersion.value}-${version.value}",
   publishTo := Some(if (isSnapshot.value) {
       Opts.resolver.sonatypeSnapshots
     } else {
