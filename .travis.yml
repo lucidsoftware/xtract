@@ -26,7 +26,7 @@ after_success:
         sbt ++$TRAVIS_SCALA_VERSION publishSigned
       else
         echo "Publishing package"
-        sbt ++$TRAVIS_SCALA_VERSION "sonatypeOpen xtract-$TRAVIS_TAG-$TRAVIS_SCALA_VERSION" publishSigned sonatypeReleaseAll
+        sbt ++$TRAVIS_SCALA_VERSION "sonatypeOpen xtract-$TRAVIS_TAG-$TRAVIS_SCALA_VERSION" publishSigned sonatypeBundleRelease
       fi
     fi
 
@@ -38,6 +38,7 @@ deploy:
   file_glob: true
   provider: releases
   skip_cleanup: true
+  overwrite: true
   on:
     tags: true
 

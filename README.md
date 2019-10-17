@@ -1,4 +1,5 @@
 # xtract
+[![Build Status](https://travis-ci.org/lucidsoftware/xtract.svg?branch=master)](https://travis-ci.org/lucidsoftware/xtract)
 
 Xtract is a scala library for deserializing XML. It is heavily inspired by the combinators in the [Play JSON library][1], in particular the [`Reads[T]`][2] class.
 
