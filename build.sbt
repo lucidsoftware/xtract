@@ -24,10 +24,9 @@ inThisBuild(Seq(
   scmInfo := Some(ScmInfo(url("https://github.com/lucidsoftware/xtract"), "scm:git:git@github.com:lucidsoftware/xtract.git")),
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
   publishMavenStyle := true,
-  useGpg := true,
   scalacOptions ++= versionedScalacOptions(scalaVersion.value),
   isSnapshot := version.value.trim.endsWith("SNAPSHOT"),
-  sonatypeSessionName := s"[sbt-sonatype] ${name.value}-${scalaBinaryVersion.value}-${version.value}",
+  sonatypeSessionName := s"[sbt-sonatype] xtract-${scalaBinaryVersion.value}-${version.value}",
   publishTo := Some(if (isSnapshot.value) {
       Opts.resolver.sonatypeSnapshots
     } else {
