@@ -17,24 +17,22 @@ cache:
     - $HOME/.sbt/boot
     - $HOME/.coursier
 
-after_success:
-  - |
-    if [ "$TRAVIS_SECURE_ENV_VARS" == true ]; then
-      echo "$PGP_SECRET" | base64 --decode | gpg --import
-      sbt ++$TRAVIS_SCALA_VERSION "; publishSigned; sonatypeBundleRelease"
-    fi
-
 deploy:
-  api_key: $GITHUB_AUTH
-  file:
-    - xtract-core/target/**/*.jar
-    - testing/target/**/*.jar
-  file_glob: true
-  provider: releases
-  skip_cleanup: true
-  overwrite: true
-  on:
-    tags: true
+  - provider: releases
+    file:
+      - xtract-core/target/**/*.jar
+      - testing/target/**/*.jar
+    file_glob: true
+    skip_cleanup: true
+    overwrite: true
+    on:
+      tags: true
+      repo: lucidsoftware/xtract
+  - provider: script
+    script: bash publish.sh
+    skip_cleanup: true
+    on:
+      repo: lucidsoftware/xtract
 
 before_script:
   - '[ "$TRAVIS_PULL_REQUEST" != false ] || export SBT_OPTS=-Dbuild.version=${TRAVIS_TAG:-$TRAVIS_BRANCH-SNAPSHOT}'

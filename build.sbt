@@ -14,6 +14,7 @@ def versionedScalacOptions(scalaVersion: String) = {
 
 inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
+  usePgpKeyHex("F76A34B7F9338AC82141DD372456B4E851B8B360"),
   developers ++= List(
     Developer("tmccombs", "Thayne McCombs", "", url("https://github.com/tmccombs")),
     Developer("", "Andy Hurd", "", null),
@@ -25,14 +26,12 @@ inThisBuild(Seq(
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
   publishMavenStyle := true,
   scalacOptions ++= versionedScalacOptions(scalaVersion.value),
-  isSnapshot := version.value.trim.endsWith("SNAPSHOT"),
   sonatypeSessionName := s"[sbt-sonatype] xtract-${scalaBinaryVersion.value}-${version.value}",
-  publishTo := Some(if (isSnapshot.value) {
-      Opts.resolver.sonatypeSnapshots
-    } else {
-      Opts.resolver.sonatypeStaging
-    })
 ))
+
+lazy val commonSettings = Seq(
+  publishTo := sonatypePublishToBundle.value
+)
 
 lazy val specs2Dependency = Seq(
   "org.specs2" %% "specs2-core" % "4.7.1",
@@ -48,6 +47,7 @@ lazy val catsDependency = Seq(
 
 lazy val xtract = project.in(file("xtract-core")).settings(
   name := "xtract",
+  commonSettings,
   description := "Library to deserialize Xml to user types.",
   libraryDependencies ++= catsDependency ++ Seq(
     "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
@@ -56,12 +56,14 @@ lazy val xtract = project.in(file("xtract-core")).settings(
 
 lazy val xtractMacros = project.in(file("macros")).settings(
   name := "xtract-macros",
+  commonSettings,
   description := "Macros for creating XmlReaders.",
   libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
 ).dependsOn(xtract)
 
 lazy val xtractTesting = project.in(file("testing")).settings(
   name := "xtract-testing",
+  commonSettings,
   description := "Specs2 matchers for xtract.",
   libraryDependencies ++= specs2Dependency
 ).dependsOn(xtract)
@@ -77,11 +79,7 @@ lazy val allTests = project.in(file("unit-tests")).settings(
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
 lazy val root = project.in(file(".")).aggregate(xtract, xtractMacros, xtractTesting, allTests).settings(
-  publishArtifact := false
+  commonSettings,
+  sonatypeBundleRelease / aggregate := false,
+  publishArtifact := false,
 )
-
-/*
-scalacOptions in (Compile, doc) ++= Seq(
-  "-doc-source-url", "https://github.com/lucidsoftware/xtract/tree/master/€{FILE_PATH}.scala"
-)
- */
