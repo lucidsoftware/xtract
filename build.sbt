@@ -71,10 +71,7 @@ lazy val xtractTesting = project.in(file("testing")).settings(
 // we have a seperate project for tests, so that we cand depend on
 // xtract-testing
 lazy val allTests = project.in(file("unit-tests")).settings(
-  publishArtifact := false,
-  packagedArtifacts := Map.empty,
-  publish := {},
-  publishLocal := {},
+  skip in publish := true,
   libraryDependencies ++= specs2Dependency map (_ % "test")
 ).dependsOn(xtract % "test", xtractTesting % "test")
 
