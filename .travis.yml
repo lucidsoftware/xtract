@@ -34,6 +34,7 @@ deploy:
     script: bash publish.sh
     skip_cleanup: true
     on:
+      all_branches: true
       repo: lucidsoftware/xtract
 
 before_script:
