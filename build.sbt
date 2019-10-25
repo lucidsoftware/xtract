@@ -14,7 +14,6 @@ def versionedScalacOptions(scalaVersion: String) = {
 
 inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
-  usePgpKeyHex("F76A34B7F9338AC82141DD372456B4E851B8B360"),
   developers ++= List(
     Developer("tmccombs", "Thayne McCombs", "", url("https://github.com/tmccombs")),
     Developer("", "Andy Hurd", "", null),
@@ -68,7 +67,7 @@ lazy val xtractTesting = project.in(file("testing")).settings(
   libraryDependencies ++= specs2Dependency
 ).dependsOn(xtract)
 
-// we have a seperate project for tests, so that we cand depend on
+// we have a seperate project for tests, so that we can depend on
 // xtract-testing
 lazy val allTests = project.in(file("unit-tests")).settings(
   skip in publish := true,
@@ -77,6 +76,5 @@ lazy val allTests = project.in(file("unit-tests")).settings(
 
 lazy val root = project.in(file(".")).aggregate(xtract, xtractMacros, xtractTesting, allTests).settings(
   commonSettings,
-  sonatypeBundleRelease / aggregate := false,
-  publishArtifact := false,
+  skip in publish := true,
 )
