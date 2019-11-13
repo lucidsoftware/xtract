@@ -85,8 +85,20 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
       intReader.read(<xml>22</xml>) must beParseSuccess(22)
     }
 
-    "give type error for bad format" in {
+    "parse int from node with extra spaces" in {
+      intReader.read(<xml>
+        22
+      </xml>) must beParseSuccess(22)
+    }
+
+    "give type error for non-numbers" in {
       intReader.read(<xml>abc</xml>) must beParseFailure(Seq(
+        TypeError(Int.getClass)
+      ))
+    }
+
+    "give type error for numbers mixed with non-space characters" in {
+      intReader.read(<xml>abc12ef</xml>) must beParseFailure(Seq(
         TypeError(Int.getClass)
       ))
     }
@@ -110,8 +122,23 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
       longReader.read(<xml>5000000000</xml>) must beParseSuccess(5000000000L)
     }
 
-    "give type error for bad format" in {
+    "parse long from node with extra spaces" in {
+      longReader.read(<xml>
+        22
+        </xml>) must beParseSuccess(22L)
+      longReader.read(<xml>
+        5000000000
+        </xml>) must beParseSuccess(5000000000L)
+    }
+
+    "give type error for non-numbers" in {
       longReader.read(<xml>abc</xml>) must beParseFailure(Seq(
+        TypeError(Long.getClass)
+      ))
+    }
+
+    "give type error for numbers mixed with non-space characters" in {
+      longReader.read(<xml>abc12ef</xml>) must beParseFailure(Seq(
         TypeError(Long.getClass)
       ))
     }
