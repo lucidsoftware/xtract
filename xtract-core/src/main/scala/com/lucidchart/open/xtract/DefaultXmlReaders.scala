@@ -48,7 +48,7 @@ trait DefaultXmlReaders {
   implicit val intReader: XmlReader[Int] = XmlReader { xml =>
     getNode(xml).flatMap { node =>
       try {
-        ParseSuccess(node.text.toInt)
+        ParseSuccess(node.text.trim.toInt)
       } catch {
         case _: NumberFormatException => ParseFailure(TypeError(Int.getClass))
       }
@@ -61,7 +61,7 @@ trait DefaultXmlReaders {
   implicit val longReader: XmlReader[Long] = XmlReader { xml =>
     getNode(xml).flatMap { node =>
       try {
-        ParseSuccess(node.text.toLong)
+        ParseSuccess(node.text.trim.toLong)
       } catch {
         case _: NumberFormatException => ParseFailure(TypeError(Long.getClass))
       }
