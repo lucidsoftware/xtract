@@ -157,8 +157,14 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
   }
 
   "booleanReader" should {
-    "parse double from node" in {
+    "parse boolean from node" in {
       booleanReader.read(<xml>false</xml>) must beParseSuccess(false)
+    }
+
+    "parse boolean from node with extra spaces" in {
+      booleanReader.read(<xml>
+        false
+        </xml>) must beParseSuccess(false)
     }
 
     "give type error for bad format" in {

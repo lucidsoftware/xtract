@@ -74,7 +74,7 @@ trait DefaultXmlReaders {
   implicit val booleanReader: XmlReader[Boolean] = XmlReader { xml =>
     getNode(xml).flatMap { node =>
       try {
-        ParseSuccess(node.text.toBoolean)
+        ParseSuccess(node.text.trim.toBoolean)
       } catch {
         case _: IllegalArgumentException => ParseFailure(TypeError(Boolean.getClass))
       }
