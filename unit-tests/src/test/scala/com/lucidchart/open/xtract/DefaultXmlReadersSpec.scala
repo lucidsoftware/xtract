@@ -186,6 +186,36 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
     }
   }
 
+  "spaceDelimitedArrayReader" should {
+    "parse array from node" in {
+      spaceDelimitedArray.read(<xml>a b c</xml>) must beParseSuccess(Array[String]("a", "b", "c"))
+    }
+
+    "parse array from node with extra spaces" in {
+      spaceDelimitedArray.read(<xml> a
+        b c
+      </xml>) must beParseSuccess(Array[String]("a", "b", "c"))
+    }
+
+    "parse array from node with one value" in {
+      spaceDelimitedArray.read(<xml>a</xml>) must beParseSuccess(Array[String]("a"))
+    }
+
+    "parse array from node with one value and extra spaces" in {
+      spaceDelimitedArray.read(<xml>
+        a
+        </xml>) must beParseSuccess(Array[String]("a"))
+    }
+
+    "parse empty array from node with no values" in {
+      spaceDelimitedArray.read(<xml></xml>) must beParseSuccess(Array.empty[String])
+    }
+
+    "parse empty array from node with only spaces as a value" in {
+      spaceDelimitedArray.read(<xml>      </xml>) must beParseSuccess(Array.empty[String])
+    }
+  }
+
   "label" should {
     "be failure when empty xml" in {
       label("blah")(pure(23)).read(empty) must beParseFailure(Seq(
@@ -235,7 +265,6 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
   }
 
   "at" should {
-
     "pass xml to path" in {
       val mockXPath = mock[XPath]
       mockXPath.apply(any[NodeSeq]) returns <xml></xml>
@@ -289,7 +318,6 @@ class DefaultXmlReadersSpec extends XmlReaderSpecification with DefaultXmlReader
   }
 
   "seq" should {
-
     "parse an empty element gives Nil" in {
       seq(pure(1)).read(empty) must beParseSuccess({ result: Seq[Int] =>
         result must beEmpty

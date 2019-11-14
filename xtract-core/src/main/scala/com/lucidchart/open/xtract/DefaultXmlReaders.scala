@@ -180,7 +180,7 @@ trait DefaultXmlReaders {
    * An [[XmlReader]] for extracting space delimited lists of values as an Array of strings.
    */
   val spaceDelimitedArray: XmlReader[Array[String]] = XmlReader { xml =>
-    ParseSuccess(xml.text.split("\\s+"))
+    ParseSuccess(xml.text.split("\\s+").filter(_.nonEmpty))
   }
 
   private def addPath(path: XPath, parseError: ParseError): ParseError = {
