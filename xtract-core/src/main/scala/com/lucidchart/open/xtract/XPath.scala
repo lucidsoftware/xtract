@@ -99,8 +99,8 @@ case class XPath(path: List[XPathNode] = Nil) {
    */
   def ++(other: XPath) = XPath(path ++ other.path)
   /**
-   * Equivalent of "[idx+1]" in xpath syntax, so the first node in this implementaion has the index 0. Note
-   * that according to the W3C specifications in xpath the index of the first child node is 1 and not 0.
+   * Equivalent of "[idx+1]" in xpath syntax, so the first node in this implementation has the index 0. Note
+   * that, according to the W3C specification, in xpath the index of the first child node is 1 and not 0.
    * @param idx The index of the node to select.
    * @return a new [[XPath]] that selects the node at index `idx` in the current selection.
    */
