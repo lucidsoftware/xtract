@@ -2,10 +2,13 @@
 set -e
 
 echo "$PGP_SECRET" | base64 --decode | gpg --import
-if [[ -z $TRAVIS_TAG ]]; then
-  command="publishSigned"
-else
+if [[ $GITHUB_REF == refs/tags/* ]]; then
   command="; publishSigned; sonatypeBundleRelease"
+  version="${GITHUB_REF#refs/tags/}"
+else
+  command="publishSigned"
+  version="${GITHUB_REF#refs/branches/}-SNAPSHOT"
 fi
-echo "Running: sbt ++$TRAVIS_SCALA_VERSION \"$command\""
-exec sbt ++$TRAVIS_SCALA_VERSION "$command"
+export SBT_OPTS="-Dbuild.version=$version"
+echo "Running: sbt \"$command\""
+exec sbt "$command"
