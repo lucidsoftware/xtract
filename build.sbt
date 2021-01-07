@@ -35,14 +35,13 @@ lazy val commonSettings = Seq(
 )
 
 lazy val specs2Dependency = Seq(
-  "org.specs2" %% "specs2-core" % "4.7.1",
-  "org.specs2" %% "specs2-mock" % "4.7.1"
+  "org.specs2" %% "specs2-core" % "4.10.0",
+  "org.specs2" %% "specs2-mock" % "4.10.0"
 )
 
-val catsVersion = "2.+"
 lazy val catsDependency = Seq(
-  "org.typelevel" %% "cats-macros" % catsVersion,
-  "org.typelevel" %% "cats-core" % catsVersion
+  "org.typelevel" %% "cats-macros" % "2.1.1",
+  "org.typelevel" %% "cats-core" % "2.3.1"
 )
 
 lazy val xtract = (projectMatrix in file("xtract-core"))
@@ -51,7 +50,7 @@ lazy val xtract = (projectMatrix in file("xtract-core"))
     commonSettings,
     description := "Library to deserialize Xml to user types.",
     libraryDependencies ++= catsDependency ++ Seq(
-      "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
+      "org.scala-lang.modules" %% "scala-xml" % "1.3.0"
     )
   )
   .jvmPlatform(scalaVersions = scalaVersions)
