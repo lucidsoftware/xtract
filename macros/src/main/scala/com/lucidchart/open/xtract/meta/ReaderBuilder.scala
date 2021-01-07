@@ -4,18 +4,18 @@ import com.lucidchart.open.xtract.{XPath, XmlReader}
 import scala.reflect.macros.blackbox.Context
 
 /**
- * A `ReadLine` can be used to specify the paths that should be used
+ * A `ReadParam` can be used to specify the paths that should be used
  * to parse a field with an XmlReader defined with the `XmlReader.makeReader`
  * macro.
  */
-case class ReadLine[+A] private (
+case class ReadParam[+A] private (
   name: String,
   path: Option[XPath]
 )
 
-object ReadLine {
-  def apply[A](name: String, path: XPath): ReadLine[A] = ReadLine[A](name, Some(path))
-  def apply[A](name: String): ReadLine[A] = ReadLine[A](name, None)
+object ReadParam {
+  def apply[A](name: String, path: XPath): ReadParam[A] = ReadParam[A](name, Some(path))
+  def apply[A](name: String): ReadParam[A] = ReadParam[A](name, None)
 }
 
 /**
@@ -68,17 +68,19 @@ private[xtract] class ReaderBuilder(val c: Context) {
     res
   }
 
-  private def extractParams(fields: Seq[c.Expr[ReadLine[_]]]): Seq[MetaReaderLine] = {
+  private def extractParams(fields: Seq[c.Expr[ReadParam[_]]]): Seq[MetaReaderLine] = {
     fields.map { lineExpr =>
       lineExpr.tree match {
-        case current @ q"$expr[$tpe](...$argss)" => {
+        case current @ q"_root_.com.lucidchart.open.xtract.meta.ReadParam[$tpe](..$args)" => {
           val t: Type = tpe.asInstanceOf[TypeTree].tpe
           if (t == typeOf[Nothing]) {
-            c.abort(current.pos, "You must specify a type parameter: ReadLine[?]")
+            c.abort(current.pos, "You must specify a type parameter: ReadParam[?]")
           }
-          argss.head match {
+          args match {
             case List(nameLit) => MetaReaderLine(extractLiteralString(nameLit), None, t)
             case List(nameLit, pathExpr) => MetaReaderLine(extractLiteralString(nameLit), Some(c.Expr(pathExpr)), t)
+            case Nil => c.abort(current.pos, "ReadParam expects at a name for the parameter")
+            case _ => c.abort(current.pos, "Too many arguments were passed to ReadParam")
           }
         }
       }
@@ -102,7 +104,7 @@ private[xtract] class ReaderBuilder(val c: Context) {
     }
   }
 
-  def buildReader[A: c.WeakTypeTag](lines: c.Expr[ReadLine[_]]*): c.Expr[XmlReader[A]] = {
+  def buildReader[A: c.WeakTypeTag](lines: c.Expr[ReadParam[_]]*): c.Expr[XmlReader[A]] = {
     val params: Seq[MetaReaderLine] = extractParams(lines)
     makeReader[A](params)
   }

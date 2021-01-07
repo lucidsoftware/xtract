@@ -1,7 +1,7 @@
 package com.lucidchart.open.xtract
 
 import java.util.NoSuchElementException
-import scala.collection.GenTraversableOnce
+import scala.collection.compat._
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -87,18 +87,18 @@ object ParseResult {
    * If any of the input [[ParseResult]]s has errors, then a [[PartialParseSuccess]] is
    * returned with both the container of [[ParseSuccess]]es and a list of all errors.
    */
-  def combine[A, B](results: GenTraversableOnce[ParseResult[A]])(implicit factory: CollectionFactory[A, B]): ParseResult[B] = {
+  def combine[A, B](results: IterableOnce[ParseResult[A]])(implicit factory: CollectionFactory[A, B]): ParseResult[B] = {
     val builder = factory.newBuilder
     val errorBuilder = new ListBuffer[ParseError]
-    for (res <- results) {
+    for (res <- results.iterator) {
       for (v <- res) builder += v
       errorBuilder ++= res.errors
     }
-    val seq = builder.result
+    val seq = builder.result()
     if (errorBuilder.isEmpty) {
       ParseSuccess(seq)
     } else {
-      PartialParseSuccess(seq, errorBuilder.result)
+      PartialParseSuccess(seq, errorBuilder.result())
     }
   }
 

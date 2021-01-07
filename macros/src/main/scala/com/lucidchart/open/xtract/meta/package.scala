@@ -4,13 +4,13 @@ import scala.language.experimental.macros
 
 package object meta {
   /**
-   * Define an [[XmlReader]] for type `A` from a list of [[ReadLine]]s.
+   * Define an [[XmlReader]] for type `A` from a list of [[ReadParam]]s.
    * @tparam A The type to create the [[XmlReader]] for.
-   * @param lines A list of [[ReadLine]]s describe the fields to parse. These should correspond to
+   * @param lines A list of [[ReadParam]]s describe the fields to parse. These should correspond to
    * the parameters for one of the constructors of `A`. There should be an implicit [[XmlReader]] in
-   * scope for the type of each [[ReadLine]].
+   * scope for the type of each [[ReadParam]].
    */
-  def makeReader[A](lines: ReadLine[_]*): XmlReader[A] = macro ReaderBuilder.buildReader[A]
+  def makeReader[A](lines: ReadParam[_]*): XmlReader[A] = macro ReaderBuilder.buildReader[A]
 
   /**
    * Define an [[XmlReader]] for type `A`, inferring the types from primary

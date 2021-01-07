@@ -7,6 +7,7 @@ def versionedScalacOptions(scalaVersion: String) = {
     "-deprecation",
     "-feature",
     "-language:higherKinds",
+    "-Xfatal-warnings",
   ) ++ (if (scalaVersion.startsWith("2.13")) {
     Nil
   } else {
@@ -51,6 +52,7 @@ lazy val xtract = (projectMatrix in file("xtract-core"))
     description := "Library to deserialize Xml to user types.",
     libraryDependencies ++= catsDependency ++ Seq(
       "org.scala-lang.modules" %% "scala-xml" % "1.3.0"
+      "org.scala-lang.modules" %% "scala-collection-compat" % "2.3.2"
     )
   )
   .jvmPlatform(scalaVersions = scalaVersions)
