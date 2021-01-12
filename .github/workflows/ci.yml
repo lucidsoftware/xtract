@@ -28,6 +28,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt') }}-
             ${{ runner.os }}-sbt-
+      - name: Set SBT_OPTS
+        run: bash gen_sbt_opts.sh
       - name: Build
         run: sbt compile packageBin packageDoc packageSrc
       - name: Test
@@ -52,6 +54,8 @@ jobs:
             target/
             */target/
           key: ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('**/*.scala') }}
+      - name: Set SBT_OPTS
+        run: bash gen_sbt_opts.sh
       - name: Publish to Sonatype
         run: bash publish.sh
         env:
