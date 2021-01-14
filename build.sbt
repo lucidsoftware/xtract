@@ -15,6 +15,8 @@ def versionedScalacOptions(scalaVersion: String) = {
   })
 }
 
+def apiUrl(name: String) = Some(url(s"https://lucidsoftware.github.io/xtract/$name/api/"))
+
 inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
   developers ++= List(
@@ -27,6 +29,7 @@ inThisBuild(Seq(
   scmInfo := Some(ScmInfo(url("https://github.com/lucidsoftware/xtract"), "scm:git:git@github.com:lucidsoftware/xtract.git")),
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
   sonatypeSessionName := s"[sbt-sonatype] xtract-${scalaBinaryVersion.value}-${version.value}",
+  autoAPIMappings := true,
 ))
 
 lazy val commonSettings = Seq(
@@ -49,6 +52,7 @@ lazy val xtract = (projectMatrix in file("xtract-core"))
     name := "xtract",
     commonSettings,
     description := "Library to deserialize Xml to user types.",
+    apiURL := apiUrl("core"),
     libraryDependencies ++= catsDependency ++ Seq(
       "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
       "org.scala-lang.modules" %% "scala-collection-compat" % "2.3.2"
@@ -62,6 +66,7 @@ lazy val xtractMacros = (projectMatrix in file("macros"))
     name := "xtract-macros",
     commonSettings,
     description := "Macros for creating XmlReaders.",
+    apiURL := apiUrl("macros"),
     libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
   )
   .jvmPlatform(scalaVersions = scalaVersions)
@@ -72,6 +77,7 @@ lazy val xtractTesting = (projectMatrix in file("testing"))
     name := "xtract-testing",
     commonSettings,
     description := "Specs2 matchers for xtract.",
+    apiURL := apiUrl("testing"),
     libraryDependencies ++= specs2Dependency
   )
   .jvmPlatform(scalaVersions = scalaVersions)

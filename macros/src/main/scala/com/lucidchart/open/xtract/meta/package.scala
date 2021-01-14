@@ -4,8 +4,8 @@ import scala.language.experimental.macros
 
 package object meta {
   /**
-   * Define an [[XmlReader]] for type `A` from a list of [[ReadParam]]s.
-   * @tparam A The type to create the [[XmlReader]] for.
+   * Define an [[com.lucidchart.open.xtract.XmlReader]] for type `A` from a list of [[ReadParam]]s.
+   * @tparam A The type to create the [[com.lucidchart.open.xtract.XmlReader]] for.
    * @param lines A list of [[ReadParam]]s describe the fields to parse. These should correspond to
    * the parameters for one of the constructors of `A`. There should be an implicit [[XmlReader]] in
    * scope for the type of each [[ReadParam]].
