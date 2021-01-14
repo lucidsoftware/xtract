@@ -5,7 +5,7 @@ import scala.reflect.macros.blackbox.Context
 
 /**
  * A `ReadParam` can be used to specify the paths that should be used
- * to parse a field with an XmlReader defined with the `XmlReader.makeReader`
+ * to parse a field with an XmlReader defined with the `makeReader`
  * macro.
  */
 case class ReadParam[+A] private (
@@ -19,7 +19,7 @@ object ReadParam {
 }
 
 /**
- * A helper class for the `XmlReader.makeReader` macro.
+ * A helper class for the `makeReader` macro.
  */
 private[xtract] class ReaderBuilder(val c: Context) {
   import c.universe._
@@ -64,14 +64,13 @@ private[xtract] class ReaderBuilder(val c: Context) {
         }
       }
     """)
-    println(s"Result: $res")
     res
   }
 
   private def extractParams(fields: Seq[c.Expr[ReadParam[_]]]): Seq[MetaReaderLine] = {
     fields.map { lineExpr =>
       lineExpr.tree match {
-        case current @ q"_root_.com.lucidchart.open.xtract.meta.ReadParam[$tpe](..$args)" => {
+        case current @ q"com.lucidchart.open.xtract.meta.ReadParam.apply[$tpe](..$args)" => {
           val t: Type = tpe.asInstanceOf[TypeTree].tpe
           if (t == typeOf[Nothing]) {
             c.abort(current.pos, "You must specify a type parameter: ReadParam[?]")

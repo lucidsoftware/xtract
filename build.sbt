@@ -26,7 +26,6 @@ inThisBuild(Seq(
   organization := "com.lucidchart",
   scmInfo := Some(ScmInfo(url("https://github.com/lucidsoftware/xtract"), "scm:git:git@github.com:lucidsoftware/xtract.git")),
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
-  publishMavenStyle := true,
   sonatypeSessionName := s"[sbt-sonatype] xtract-${scalaBinaryVersion.value}-${version.value}",
 ))
 
@@ -51,7 +50,7 @@ lazy val xtract = (projectMatrix in file("xtract-core"))
     commonSettings,
     description := "Library to deserialize Xml to user types.",
     libraryDependencies ++= catsDependency ++ Seq(
-      "org.scala-lang.modules" %% "scala-xml" % "1.3.0"
+      "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
       "org.scala-lang.modules" %% "scala-collection-compat" % "2.3.2"
     )
   )
@@ -79,10 +78,13 @@ lazy val xtractTesting = (projectMatrix in file("testing"))
 
 // we have a seperate project for tests, so that we can depend on
 // xtract-testing
-lazy val allTests = (projectMatrix in file("unit-tests")).settings(
-  skip in publish := true,
-  libraryDependencies ++= specs2Dependency map (_ % "test")
-).dependsOn(xtract % "test", xtractTesting % "test")
+lazy val allTests = (projectMatrix in file("unit-tests"))
+  .dependsOn(xtract % "test", xtractMacros % "test", xtractTesting % "test")
+  .settings(
+    skip in publish := true,
+    libraryDependencies ++= specs2Dependency map (_ % "test")
+  )
+  .jvmPlatform(scalaVersions = scalaVersions)
 
 lazy val root = (project in file("."))
   .aggregate(xtract.projectRefs ++ xtractMacros.projectRefs ++ xtractTesting.projectRefs ++ allTests.projectRefs: _*)
