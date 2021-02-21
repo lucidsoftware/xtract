@@ -7,12 +7,15 @@ def versionedScalacOptions(scalaVersion: String) = {
     "-deprecation",
     "-feature",
     "-language:higherKinds",
+    "-Xfatal-warnings",
   ) ++ (if (scalaVersion.startsWith("2.13")) {
     Nil
   } else {
     Seq("-Ypartial-unification")
   })
 }
+
+def apiUrl(name: String) = Some(url(s"https://lucidsoftware.github.io/xtract/$name/api/"))
 
 inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
@@ -25,8 +28,8 @@ inThisBuild(Seq(
   organization := "com.lucidchart",
   scmInfo := Some(ScmInfo(url("https://github.com/lucidsoftware/xtract"), "scm:git:git@github.com:lucidsoftware/xtract.git")),
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
-  publishMavenStyle := true,
   sonatypeSessionName := s"[sbt-sonatype] xtract-${scalaBinaryVersion.value}-${version.value}",
+  autoAPIMappings := true,
 ))
 
 lazy val commonSettings = Seq(
@@ -49,8 +52,10 @@ lazy val xtract = (projectMatrix in file("xtract-core"))
     name := "xtract",
     commonSettings,
     description := "Library to deserialize Xml to user types.",
+    apiURL := apiUrl("core"),
     libraryDependencies ++= catsDependency ++ Seq(
-      "org.scala-lang.modules" %% "scala-xml" % "1.3.0"
+      "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
+      "org.scala-lang.modules" %% "scala-collection-compat" % "2.3.2"
     )
   )
   .jvmPlatform(scalaVersions = scalaVersions)
@@ -61,6 +66,7 @@ lazy val xtractMacros = (projectMatrix in file("macros"))
     name := "xtract-macros",
     commonSettings,
     description := "Macros for creating XmlReaders.",
+    apiURL := apiUrl("macros"),
     libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
   )
   .jvmPlatform(scalaVersions = scalaVersions)
@@ -71,16 +77,20 @@ lazy val xtractTesting = (projectMatrix in file("testing"))
     name := "xtract-testing",
     commonSettings,
     description := "Specs2 matchers for xtract.",
+    apiURL := apiUrl("testing"),
     libraryDependencies ++= specs2Dependency
   )
   .jvmPlatform(scalaVersions = scalaVersions)
 
 // we have a seperate project for tests, so that we can depend on
 // xtract-testing
-lazy val allTests = (projectMatrix in file("unit-tests")).settings(
-  skip in publish := true,
-  libraryDependencies ++= specs2Dependency map (_ % "test")
-).dependsOn(xtract % "test", xtractTesting % "test")
+lazy val allTests = (projectMatrix in file("unit-tests"))
+  .dependsOn(xtract % "test", xtractMacros % "test", xtractTesting % "test")
+  .settings(
+    skip in publish := true,
+    libraryDependencies ++= specs2Dependency map (_ % "test")
+  )
+  .jvmPlatform(scalaVersions = scalaVersions)
 
 lazy val root = (project in file("."))
   .aggregate(xtract.projectRefs ++ xtractMacros.projectRefs ++ xtractTesting.projectRefs ++ allTests.projectRefs: _*)
