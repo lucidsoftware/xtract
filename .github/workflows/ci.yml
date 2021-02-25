@@ -102,9 +102,6 @@ jobs:
             target/
             */target/
           key: ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('**/*.scala') }}
-          restore-keys: |
-            ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt') }}-
-            ${{ runner.os }}-sbt-
       - name: Build docs
         run: sbt "xtract / doc" "xtractMacros / doc" "xtractTesting / doc"
         working-directory: ./code
