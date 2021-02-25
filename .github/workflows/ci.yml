@@ -93,7 +93,6 @@ jobs:
         with:
           ref: refs/heads/gh-pages
           path: pages
-          fetch-depth: 0
       - uses: actions/cache@v2
         with:
           path: |
