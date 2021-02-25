@@ -80,3 +80,47 @@ jobs:
           tag="${GITHUB_REF#refs/tags/}"
           args=$(printf -- "-a %q " {xtract-core,testing,macros}/target/*/*.jar)
           hub release create $args -m "Release $tag" $tag
+  publish-docs:
+    if: startsWith(github.ref, 'refs/tags')
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: code
+      - name: Checkout pages
+        uses: actions/checkout@v2
+        with:
+          ref: refs/heads/gh-pages
+          path: pages
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.ivy2/cache
+            ~/.sbt
+            ~/.coursier
+            target/
+            */target/
+          key: ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('**/*.scala') }}
+      - name: Build docs
+        run: sbt "xtract / doc" "xtractMacros / doc" "xtractTesting / doc"
+        working-directory: ./code
+      - name: Copy docs
+        run: |
+          version="${GITHUB_REF#refs/*/}"
+          mkdir -p pages/{core,macros,testing}/api/$version
+          cp -rf xtract-core/target/jvm-$SCALA_VERS/api/* pages/core/api/$version/
+          cp -rf macros/target/jvm-$SCALA_VERS/api/* pages/macros/api/$version/
+          cp -rf testing/target/jvm-$SCALA_VERS/api/* pages/testing/api/$version/
+        env:
+          SCALA_VERS: 2.13
+      - name: Commit changes
+        run: |
+          git config --local user.email "github@lucidchart.com"
+          git config --local user.name "github-actions [bot]"
+          git add .
+          git commit -m "Add documentation for ${{ github.ref }}"
+        working-directory: ./pages
+      - name: Push changes
+        run: git push origin HEAD:refs/heads/gh-pages
+        working-directory: ./pages
