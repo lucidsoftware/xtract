@@ -1,13 +1,13 @@
 name := "Xtract"
 
-val scalaVersions = Seq("2.13.4", "2.12.12")
+val scalaVersions = Seq("2.13.6", "2.12.15")
 
 def versionedScalacOptions(scalaVersion: String) = {
   Seq(
     "-deprecation",
     "-feature",
     "-language:higherKinds",
-    "-Xfatal-warnings",
+    "-Xfatal-warnings"
   ) ++ (if (scalaVersion.startsWith("2.13")) {
     Nil
   } else {
@@ -21,7 +21,7 @@ inThisBuild(Seq(
   credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USERNAME"), System.getenv("SONATYPE_PASSWORD")),
   developers ++= List(
     Developer("tmccombs", "Thayne McCombs", "", url("https://github.com/tmccombs")),
-    Developer("", "Andy Hurd", "", null),
+    Developer("", "Andy Hurd", "", null)
   ),
   licenses += "Apache License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"),
   homepage := Some(url("https://github.com/lucidsoftware/xtract")),
@@ -29,7 +29,7 @@ inThisBuild(Seq(
   scmInfo := Some(ScmInfo(url("https://github.com/lucidsoftware/xtract"), "scm:git:git@github.com:lucidsoftware/xtract.git")),
   version := sys.props.getOrElse("build.version", "0-SNAPSHOT"),
   sonatypeSessionName := s"[sbt-sonatype] xtract-${scalaBinaryVersion.value}-${version.value}",
-  autoAPIMappings := true,
+  autoAPIMappings := true
 ))
 
 lazy val commonSettings = Seq(
@@ -38,13 +38,13 @@ lazy val commonSettings = Seq(
 )
 
 lazy val specs2Dependency = Seq(
-  "org.specs2" %% "specs2-core" % "4.10.0",
-  "org.specs2" %% "specs2-mock" % "4.10.0"
+  "org.specs2" %% "specs2-core" % "4.12.12",
+  "org.specs2" %% "specs2-mock" % "4.12.12"
 )
 
 lazy val catsDependency = Seq(
   "org.typelevel" %% "cats-macros" % "2.1.1",
-  "org.typelevel" %% "cats-core" % "2.3.1"
+  "org.typelevel" %% "cats-core" % "2.6.1"
 )
 
 lazy val xtract = (projectMatrix in file("xtract-core"))
@@ -54,8 +54,8 @@ lazy val xtract = (projectMatrix in file("xtract-core"))
     description := "Library to deserialize Xml to user types.",
     apiURL := apiUrl("core"),
     libraryDependencies ++= catsDependency ++ Seq(
-      "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
-      "org.scala-lang.modules" %% "scala-collection-compat" % "2.3.2"
+      "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
+      "org.scala-lang.modules" %% "scala-collection-compat" % "2.5.0"
     )
   )
   .jvmPlatform(scalaVersions = scalaVersions)
@@ -87,7 +87,7 @@ lazy val xtractTesting = (projectMatrix in file("testing"))
 lazy val allTests = (projectMatrix in file("unit-tests"))
   .dependsOn(xtract % "test", xtractMacros % "test", xtractTesting % "test")
   .settings(
-    skip in publish := true,
+    publish / skip := true,
     libraryDependencies ++= specs2Dependency map (_ % "test")
   )
   .jvmPlatform(scalaVersions = scalaVersions)
@@ -96,5 +96,5 @@ lazy val root = (project in file("."))
   .aggregate(xtract.projectRefs ++ xtractMacros.projectRefs ++ xtractTesting.projectRefs ++ allTests.projectRefs: _*)
   .settings(
     commonSettings,
-    skip in publish := true,
+    publish / skip:= true
   )
